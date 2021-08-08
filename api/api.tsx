@@ -1,4 +1,4 @@
-import { API_KEY } from "./config";
+import { API_KEY } from "../config";
 const genres = {
   12: "Adventure",
   14: "Fantasy",
@@ -56,6 +56,7 @@ export const getMovies = async () => {
       rating: vote_average,
       description: overview,
       releaseDate: release_date,
+      //tu rabi dojti niki key value idk kako se stavi
       genres: genre_ids.map((genre) => genres[genre]),
     })
   );
