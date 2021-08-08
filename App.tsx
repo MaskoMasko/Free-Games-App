@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
   mainHeader: {
     fontSize: 36,
     fontWeight: "bold",
-    marginTop: 100,
+    transform: [{ translateY: 100 }],
   },
 });
