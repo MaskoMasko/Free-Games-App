@@ -1,10 +1,13 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, Animated } from "react-native";
 import { MovieRating } from "./MovieRating";
 
-export const MoviesForList = ({ movie }: any) => {
+export const MoviesForList = ({ movie, translateY }: any) => {
   return (
-    <View key={movie.item.key} style={styles.movieContainer}>
+    <Animated.View
+      key={movie.item.key}
+      style={[styles.movieContainer, { transform: [{ translateY }] }]}
+    >
       <Image
         style={styles.moviePoster}
         source={{ uri: `${movie.item.poster}` }}
@@ -26,7 +29,7 @@ export const MoviesForList = ({ movie }: any) => {
       <Text numberOfLines={3} style={styles.movieDescText}>
         {movie.item.description}
       </Text>
-    </View>
+    </Animated.View>
   );
 };
 
