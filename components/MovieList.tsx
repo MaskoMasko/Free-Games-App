@@ -66,8 +66,12 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
           });
           return (
             <TouchableOpacity
+              activeOpacity={0.5}
               style={{ marginTop: 130 }}
-              onPress={() => navigation.navigate("Notifications")}
+              onPress={() => {
+                store.setSelectedMovie(movie.item.key);
+                navigation.navigate("Movie Details");
+              }}
             >
               <MoviesForList
                 movie={movie}

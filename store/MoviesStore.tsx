@@ -21,6 +21,7 @@ const MovieModel = types.model("Movie", {
 const MovieStore = types
   .model("MovieStore", {
     movieList: types.array(MovieModel),
+    selectedMovie: types.safeReference(MovieModel),
   })
   .actions((self) => {
     return {
@@ -28,6 +29,9 @@ const MovieStore = types
         const moviesListData = yield getMovies();
         self.movieList = moviesListData;
       }),
+      setSelectedMovie(movieKey: any) {
+        self.selectedMovie = movieKey;
+      },
     };
   });
 
