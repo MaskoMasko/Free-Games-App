@@ -1,30 +1,53 @@
-import {
-  flow, types
-} from "mobx-state-tree";
-import { getMovies } from "../api/api";
+import { flow, getRoot, types } from "mobx-state-tree";
+import { getFilteredMovies, getMovies } from "../api/api";
+import { API_KEY } from "../config";
 
-const MovieModel = types.model("Movie", {
-  key: types.identifier,
-  title: types.string,
-  poster: types.string,
-  backdrop: types.string,
-  rating: types.number,
-  description: types.string,
-  releaseDate: types.string,
-  genres: types.array(types.string),
-});
+const MovieModel = types
+  .model("Movie", {
+    key: types.identifier,
+    title: types.string,
+    poster: types.string,
+    backdrop: types.string,
+    rating: types.number,
+    description: types.string,
+    releaseDate: types.maybe(types.string),
+    genres: types.array(types.string),
+  })
+  .actions((self) => {
+    return {
+      addToFavorites() {
+        const root: any = getRoot(self);
+        root.addFavoriteMovie(self.key);
+      },
+    };
+  });
 
 const MovieStore = types
   .model("MovieStore", {
-    movieList: types.array(MovieModel),
+    allMovies: types.map(MovieModel),
+
     selectedMovie: types.safeReference(MovieModel),
-    favoriteMoviesList: types.array(types.safeReference(MovieModel)),
+    favoriteMoviesList: types.array(
+      types.safeReference(MovieModel, { acceptsUndefined: false })
+    ),
+    filteredMovies: types.array(
+      types.safeReference(MovieModel, { acceptsUndefined: false })
+    ),
+  })
+  .views((self) => {
+    return {
+      get movieList() {
+        return [...self.allMovies.values()];
+      },
+    };
   })
   .actions((self) => {
     return {
       fetchData: flow(function* fetchData() {
         const moviesListData = yield getMovies();
-        self.movieList = moviesListData;
+        for (let movie of moviesListData) {
+          self.allMovies.put(movie);
+        }
       }),
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;
@@ -35,9 +58,20 @@ const MovieStore = types
       removeFavoriteMovie(id: number) {
         self.favoriteMoviesList.splice(id, 1);
       },
+      fetchFilteredMovies: flow(function* fetchFilteredMovies(inputValue) {
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${inputValue}`;
+
+        const moviesListData = yield getFilteredMovies(url);
+
+        for (let i = 0; i < moviesListData.length; i++) {
+          self.allMovies.put(moviesListData[i]);
+        }
+
+        self.filteredMovies = moviesListData.map(
+          (movie: { key: string }) => movie.key
+        );
+      }),
     };
   });
 
-export const store = MovieStore.create({
-  movieList: [],
-});
+export const store = MovieStore.create({});

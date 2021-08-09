@@ -43,7 +43,7 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
           color="black"
           title="ADD TO FAVORITES"
           onPress={() => {
-            store.addFavoriteMovie(store.selectedMovie?.key);
+            store.selectedMovie?.addToFavorites();
             navigation.navigate("Favorites");
           }}
         ></CustomButton>

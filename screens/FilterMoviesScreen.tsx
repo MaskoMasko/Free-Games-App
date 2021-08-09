@@ -2,10 +2,10 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { FilterMovies } from "../components/FilterMovies";
 
-export function FilterMoviesScreen() {
+export function FilterMoviesScreen({ navigation }: { navigation: any }) {
   return (
     <View style={styles.container}>
-      <FilterMovies></FilterMovies>
+      <FilterMovies navigation={navigation}></FilterMovies>
     </View>
   );
 }
