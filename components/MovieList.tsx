@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Animated, View, TouchableOpacity } from "react-native";
 import { getMovies } from ".././api/api";
+import { store } from "../store/MoviesStore";
 import { MoviesForList } from "./MoviesForList";
+import { observer } from "mobx-react-lite";
 
 const ITEM_WIDTH = 320;
 
@@ -16,18 +18,23 @@ interface MovieItemInterface {
   releaseDate: string;
 }
 
-export const MovieList = ({ navigation }: { navigation: any }) => {
+export const MovieList = observer(({ navigation }: { navigation: any }) => {
   const [movies, setMovies] = useState<any>([]);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
-  const fetchData = async () => {
-    const movies = await getMovies();
-    setMovies([{ key: "left-spacer" }, ...movies, { key: "right-spacer" }]);
+  const fetchMovieData = async () => {
+    const thismovies = await store.fetchData();
+    setMovies([
+      { key: "left-spacer" },
+      ...store.movieList,
+      { key: "right-spacer" },
+    ]);
     // movies.map((e: Movie) => console.log(e.genres));
   };
 
   useEffect(() => {
-    fetchData();
+    fetchMovieData();
+    // store.fetchData();
   }, []);
 
   return (
@@ -72,4 +79,4 @@ export const MovieList = ({ navigation }: { navigation: any }) => {
       ></Animated.FlatList>
     </View>
   );
-};
+});
