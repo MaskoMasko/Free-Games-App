@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { FavoriteMoviesList } from "../components/FavoriteMoviesList";
 
-export function SettingsScreen() {
+export function FavoritesScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.mainHeader}>OTP MOSIFSNF</Text>
+      <FavoriteMoviesList></FavoriteMoviesList>
     </View>
   );
 }

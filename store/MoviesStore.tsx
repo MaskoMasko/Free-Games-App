@@ -22,6 +22,7 @@ const MovieStore = types
   .model("MovieStore", {
     movieList: types.array(MovieModel),
     selectedMovie: types.safeReference(MovieModel),
+    favoriteMoviesList: types.array(types.safeReference(MovieModel)),
   })
   .actions((self) => {
     return {
@@ -31,6 +32,12 @@ const MovieStore = types
       }),
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;
+      },
+      addFavoriteMovie(movieKey: any) {
+        self.favoriteMoviesList.push(movieKey);
+      },
+      removeFavoriteMovie(id: number) {
+        self.favoriteMoviesList.splice(id, 1);
       },
     };
   });

@@ -52,7 +52,10 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
           backgroundColor="orange"
           color="black"
           title="ADD TO FAVORITES"
-          onPress={() => {}}
+          onPress={() => {
+            store.addFavoriteMovie(store.selectedMovie?.key);
+            navigation.navigate("Favorites");
+          }}
         ></CustomButton>
       </View>
     </ScrollView>

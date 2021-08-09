@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { HomeScreen } from "./screens/HomeScreen";
-import { SettingsScreen } from "./screens/SettingsScreen";
+import { FavoritesScreen } from "./screens/FavoriteMoviesScreen";
 import { MovieDetailsScreen } from "./screens/MovieDetailsScreen";
 
 const Drawer = createDrawerNavigator();
@@ -14,20 +14,30 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Movies go YES" component={HomeScreen} />
-        <Drawer.Screen
-          name="settings"
-          component={SettingsScreen}
-        ></Drawer.Screen>
-        <Drawer.Screen
+      <Stack.Navigator>
+        <Stack.Screen name="DrawerStack" options={{ headerShown: false }}>
+          {() => {
+            return (
+              <Drawer.Navigator initialRouteName="Home">
+                <Drawer.Screen
+                  name="Home"
+                  component={HomeScreen}
+                  options={{ title: "Movies go YES" }}
+                />
+                <Drawer.Screen
+                  name="Favorites"
+                  component={FavoritesScreen}
+                ></Drawer.Screen>
+              </Drawer.Navigator>
+            );
+          }}
+        </Stack.Screen>
+        <Stack.Screen
           name="Movie Details"
           component={MovieDetailsScreen}
-        ></Drawer.Screen>
-      </Drawer.Navigator>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
-      </Stack.Navigator> */}
+          options={{ title: "Movie Details" }}
+        ></Stack.Screen>
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
