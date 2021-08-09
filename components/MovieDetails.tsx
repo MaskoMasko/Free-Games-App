@@ -1,9 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import {
-    Image,
-    ScrollView, StyleSheet, Text, View
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { store } from "../store/MoviesStore";
 import { CustomButton } from "./CustomButton";
 
@@ -38,7 +35,7 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
           backgroundColor="black"
           title="GO BACK"
           onPress={() => {
-            navigation.navigate("Movies go YES");
+            navigation.navigate("Home");
           }}
         ></CustomButton>
         <CustomButton
