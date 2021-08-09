@@ -1,9 +1,8 @@
+import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
-import { FlatList, Animated, View, TouchableOpacity } from "react-native";
-import { getMovies } from ".././api/api";
+import { Animated, TouchableOpacity, View } from "react-native";
 import { store } from "../store/MoviesStore";
 import { MoviesForList } from "./MoviesForList";
-import { observer } from "mobx-react-lite";
 
 const ITEM_WIDTH = 320;
 

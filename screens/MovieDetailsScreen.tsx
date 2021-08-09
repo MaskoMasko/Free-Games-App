@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { MovieDetails } from "../components/MovieDetails";
 
 export function MovieDetailsScreen({ navigation }: { navigation: any }) {

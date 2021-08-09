@@ -1,17 +1,10 @@
-import { store } from "../store/MoviesStore";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import {
-  Text,
-  StyleSheet,
-  View,
-  Button,
-  Image,
-  ScrollView,
-  FlatList,
+    Image,
+    ScrollView, StyleSheet, Text, View
 } from "react-native";
-import { MoviesForList } from "./MoviesForList";
-import { getDependencyTree } from "mobx";
+import { store } from "../store/MoviesStore";
 import { CustomButton } from "./CustomButton";
 
 export const MovieDetails = observer(({ navigation }: { navigation: any }) => {

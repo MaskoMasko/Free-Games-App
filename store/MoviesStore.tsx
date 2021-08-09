@@ -1,9 +1,5 @@
 import {
-  types,
-  flow,
-  getSnapshot,
-  onSnapshot,
-  applySnapshot,
+  flow, types
 } from "mobx-state-tree";
 import { getMovies } from "../api/api";
 
