@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Animated, View } from "react-native";
+import { FlatList, Animated, View, TouchableOpacity } from "react-native";
 import { getMovies } from ".././api/api";
 import { MoviesForList } from "./MoviesForList";
 
@@ -16,7 +16,7 @@ interface MovieItemInterface {
   releaseDate: string;
 }
 
-export const MovieList = () => {
+export const MovieList = ({ navigation }: { navigation: any }) => {
   const [movies, setMovies] = useState<any>([]);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
@@ -26,7 +26,6 @@ export const MovieList = () => {
     // movies.map((e: Movie) => console.log(e.genres));
   };
 
-  ///HAHAHAHAHAHHAHAHAHA KOJI JOKE OMFG.........................................
   useEffect(() => {
     fetchData();
   }, []);
@@ -59,10 +58,15 @@ export const MovieList = () => {
             outputRange: [0, -50, 0],
           });
           return (
-            <MoviesForList
-              movie={movie}
-              translateY={translateY}
-            ></MoviesForList>
+            <TouchableOpacity
+              style={{ marginTop: 130 }}
+              onPress={() => navigation.navigate("Notifications")}
+            >
+              <MoviesForList
+                movie={movie}
+                translateY={translateY}
+              ></MoviesForList>
+            </TouchableOpacity>
           );
         }}
       ></Animated.FlatList>
