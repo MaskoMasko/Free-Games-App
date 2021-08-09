@@ -37,7 +37,8 @@ const MovieStore = types
   .views((self) => {
     return {
       get movieList() {
-        return [...self.allMovies.values()];
+        const splicedMovies = [...self.allMovies.values()];
+        return splicedMovies.splice(0, 20);
       },
     };
   })
@@ -64,9 +65,10 @@ const MovieStore = types
         const moviesListData = yield getFilteredMovies(url);
 
         for (let i = 0; i < moviesListData.length; i++) {
+          //stavlja sve filmove tamo unutra
           self.allMovies.put(moviesListData[i]);
         }
-
+        //dobija samo keyeve jer je refrence gori
         self.filteredMovies = moviesListData.map(
           (movie: { key: string }) => movie.key
         );

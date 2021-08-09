@@ -69,7 +69,7 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
               style={{ marginTop: 130 }}
               onPress={() => {
                 store.setSelectedMovie(movie.item.key);
-                navigation.navigate("Movie Details");
+                navigation.navigate("Details");
               }}
             >
               <MoviesForList

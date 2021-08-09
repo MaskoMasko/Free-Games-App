@@ -37,7 +37,7 @@ export default function App() {
           }}
         </Stack.Screen>
         <Stack.Screen
-          name="Movie Details"
+          name="Details"
           component={MovieDetailsScreen}
           options={{ title: "Movie Details" }}
         ></Stack.Screen>
