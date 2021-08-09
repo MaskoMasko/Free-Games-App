@@ -5,6 +5,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { HomeScreen } from "./screens/HomeScreen";
 import { FavoritesScreen } from "./screens/FavoriteMoviesScreen";
 import { MovieDetailsScreen } from "./screens/MovieDetailsScreen";
+import { FilterMoviesScreen } from "./screens/FilterMoviesScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -26,6 +27,10 @@ export default function App() {
                 <Drawer.Screen
                   name="Favorites"
                   component={FavoritesScreen}
+                ></Drawer.Screen>
+                <Drawer.Screen
+                  name="Filter"
+                  component={FilterMoviesScreen}
                 ></Drawer.Screen>
               </Drawer.Navigator>
             );

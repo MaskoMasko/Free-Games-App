@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { FavoriteMoviesList } from "../components/FavoriteMoviesList";
+import { FilterMovies } from "../components/FilterMovies";
 
-export function FavoritesScreen() {
+export function FilterMoviesScreen() {
   return (
     <View style={styles.container}>
-      <FavoriteMoviesList></FavoriteMoviesList>
+      <FilterMovies></FilterMovies>
     </View>
   );
 }
@@ -16,11 +16,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-  },
-  mainHeader: {
-    fontSize: 36,
-    fontWeight: "bold",
-    transform: [{ translateY: 100 }],
-    marginBottom: 30,
   },
 });
