@@ -17,14 +17,12 @@ export const MoviesForList = ({ movie, translateY }: any) => {
       </Text>
       <MovieRating movie={movie}></MovieRating>
       <View style={{ flexDirection: "row", alignSelf: "center" }}>
-        <Text style={styles.movieGenres}>
-          {movie.item.genres[0].toLowerCase()}
-        </Text>
-        {movie.item.genres[1] ? (
-          <Text style={styles.movieGenres}>
-            {movie.item.genres[1].toLowerCase()}
-          </Text>
-        ) : null}
+        {movie.item.genres.map((e: string, i: number) => {
+          if (i < 2) {
+            return <Text style={styles.movieGenres}>{e}</Text>;
+          }
+          return;
+        })}
       </View>
       <Text numberOfLines={3} style={styles.movieDescText}>
         {movie.item.description}
