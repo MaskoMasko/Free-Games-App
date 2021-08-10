@@ -4,8 +4,13 @@ import { useQuery } from "react-query";
 import { MovieList } from "../components/MovieList";
 import { store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
+import { NavigationProp } from "@react-navigation/core";
 
-export function HomeScreen({ navigation }: { navigation: any }) {
+export function HomeScreen({
+  navigation,
+}: {
+  navigation: NavigationProp<any>;
+}) {
   const query = useQuery("genreList", () => {
     return store.fetchGenreList();
   });

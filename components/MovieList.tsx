@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import React, { useState } from "react";
+import { NavigationProp } from "@react-navigation/core";
 import { Animated, Text, TouchableOpacity, View } from "react-native";
 import { useQuery } from "react-query";
 import { MovieModel, store } from "../store/MoviesStore";
@@ -12,7 +13,7 @@ const ITEM_WIDTH = 320;
 export const MovieList = observer(function MovieList({
   navigation,
 }: {
-  navigation: any;
+  navigation: NavigationProp<any>;
 }) {
   const [movies, setMovies] = useState<Instance<typeof MovieModel>[]>([]);
   const scrollX = React.useRef(new Animated.Value(0)).current;

@@ -11,6 +11,7 @@ const {
   safeReference,
   identifier,
   map,
+  maybe,
 } = types;
 
 const GenreModel = model({
@@ -25,7 +26,7 @@ export const MovieModel = model("Movie", {
   backdrop: string,
   rating: number,
   description: string,
-  releaseDate: string,
+  releaseDate: maybe(string),
   genre_ids: array(safeReference(GenreModel, { acceptsUndefined: false })),
 }).actions((self) => {
   return {
