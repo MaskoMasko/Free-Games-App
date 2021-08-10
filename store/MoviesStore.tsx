@@ -2,6 +2,11 @@ import { flow, getRoot, types } from "mobx-state-tree";
 import { getFilteredMovies, getMovies } from "../api/api";
 import { API_KEY } from "../config";
 
+const GenreModel = types.model({
+  key: types.number,
+  genre: types.string,
+});
+
 const MovieModel = types
   .model("Movie", {
     key: types.identifier,
@@ -11,7 +16,7 @@ const MovieModel = types
     rating: types.number,
     description: types.string,
     releaseDate: types.maybe(types.string),
-    genres: types.array(types.string),
+    genres: types.array(GenreModel),
   })
   .actions((self) => {
     return {
@@ -83,6 +88,12 @@ const MovieStore = types
           (movie: { key: string }) => movie.key
         );
         return self.process(moviesListData);
+      }),
+      fetchMoviesByGenre: flow(function* fetchMoviesByGenre(genreKey) {
+        const genres = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreKey}`;
+
+        // const moviesListData = yield getFilteredMovies(url);
+        // return self.process(moviesListData);
       }),
     };
   });

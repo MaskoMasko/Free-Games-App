@@ -17,11 +17,15 @@ export const MoviesForList = ({ movie, translateY }: any) => {
       </Text>
       <MovieRating movie={movie}></MovieRating>
       <View style={{ flexDirection: "row", alignSelf: "center" }}>
-        {movie.item.genres.map((genre: string, index: number) => {
+        {movie.item.genres.map((genre: any, index: number) => {
           if (index < 2) {
             return (
-              <Text key={index} style={styles.movieGenres}>
-                {genre}
+              <Text
+                key={index}
+                style={styles.movieGenres}
+                onPress={() => console.log(genre.key)}
+              >
+                {genre.genre}
               </Text>
             );
           }
