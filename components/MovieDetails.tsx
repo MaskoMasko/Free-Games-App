@@ -8,8 +8,8 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
   return (
     <ScrollView style={{ height: "100%", width: "100%" }}>
       <Text style={styles.mainHeader}>{store.selectedMovie?.title}</Text>
-      <Text style={styles.detailsText}>Genres:</Text>
-      <View style={{ flexDirection: "row" }}>
+      <Text style={styles.detailsText}> Genres:</Text>
+      <View style={{ flexDirection: "row", flexWrap: "wrap", marginLeft: 10 }}>
         {store.selectedMovie?.genre_ids.map((genre, index: number) => {
           return (
             <Text
