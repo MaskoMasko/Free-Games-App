@@ -1,18 +1,10 @@
 import { observer } from "mobx-react-lite";
-import { NavigationProp } from "@react-navigation/core";
 import React from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { useQuery } from "react-query";
+import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
 import { store } from "../store/MoviesStore";
 
-export const FilterGenreList = observer(
-  ({ navigation }: { navigation: NavigationProp<any> }) => {
-    const { isLoading, isError, isIdle, data } = useQuery(
-      ["FilteredMovies", store.genreId],
-      () => {
-        return store.fetchMoviesByGenre(store.genreId);
-      }
-    );
+export const FilterAndGenreList = observer(
+  ({ navigation, isError, isLoading, isIdle, moviesData }: any) => {
     return (
       <View>
         {isError ? (
@@ -41,7 +33,7 @@ export const FilterGenreList = observer(
           </View>
         ) : isIdle ? null : (
           <ScrollView>
-            {store.filteredMoviesByGenre.map((movie) => {
+            {moviesData.map((movie: any) => {
               return (
                 <TouchableOpacity
                   key={movie.key}
