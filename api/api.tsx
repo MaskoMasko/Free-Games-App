@@ -67,7 +67,6 @@ export const getMovies = async () => {
       vote_average: number;
       overview: string;
       release_date: string;
-      // genre_ids: GenreId[];
       genre_ids: any[];
     }) => ({
       key: String(id),
@@ -77,13 +76,7 @@ export const getMovies = async () => {
       rating: vote_average,
       description: overview,
       releaseDate: release_date,
-      //tu rabi dojti niki key value idk kako se stavi
-      //genres mora biti array sa obj key i genre
-      genres: genre_ids.map((genre) => {
-        for (let g of genres) {
-          if (genre == g.key) return g;
-        }
-      }),
+      genre_ids: genre_ids,
     })
   );
   return movies;
@@ -120,11 +113,12 @@ export const getFilteredMovies = async (url: string) => {
       description: overview,
       releaseDate: release_date,
       //tu rabi dojti niki key value idk kako se stavi
-      genres: genre_ids.map((genre) => {
-        for (let g of genres) {
-          if (genre == g.key) return g;
-        }
-      }),
+      // genres: genre_ids.map((genre) => {
+      //   for (let g of genres) {
+      //     if (genre == g.key) return g;
+      //   }
+      // }),
+      genre_ids: genre_ids,
     })
   );
   return movies;
@@ -161,11 +155,7 @@ export const getMoviesByGenre = async (url: string) => {
       description: overview,
       releaseDate: release_date,
       //tu rabi dojti niki key value idk kako se stavi
-      genres: genre_ids.map((genre) => {
-        for (let g of genres) {
-          if (genre == g.key) return g;
-        }
-      }),
+      genre_ids: genre_ids,
     })
   );
   return movies;

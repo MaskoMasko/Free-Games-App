@@ -10,14 +10,17 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
       <Text style={styles.mainHeader}>{store.selectedMovie?.title}</Text>
       <Text style={styles.detailsText}>Genres:</Text>
       <View style={{ flexDirection: "row" }}>
-        {store.selectedMovie?.genres.map((genre, index: number) => {
+        {store.selectedMovie?.genre_ids.map((genre, index: number) => {
           return (
             <Text
               style={styles.movieGenres}
               key={index}
-              onPress={() => navigation.navigate("Genres")}
+              onPress={() => {
+                store.setOneFatNothing(genre.name);
+                navigation.navigate("Genres");
+              }}
             >
-              {genre.genre}
+              {genre.name}
             </Text>
           );
         })}

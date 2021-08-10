@@ -1,27 +1,21 @@
 import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import { Animated, TouchableOpacity, View, Text } from "react-native";
-import { store } from "../store/MoviesStore";
+import { MovieModel, store } from "../store/MoviesStore";
 import { MoviesForList } from "./MoviesForList";
 import { useQuery } from "react-query";
 import { getMovies } from "../api/api";
+import { Instance } from "mobx-state-tree";
 // import _ from "lodash";
 
 const ITEM_WIDTH = 320;
 
-interface MovieItemInterface {
-  key: string;
-  title: string;
-  genres: string[];
-  poster: string;
-  backdrop: string;
-  rating: number;
-  description: string;
-  releaseDate: string;
-}
-
-export const MovieList = observer(({ navigation }: { navigation: any }) => {
-  const [movies, setMovies] = useState<any>([]);
+export const MovieList = observer(function MovieList({
+  navigation,
+}: {
+  navigation: any;
+}) {
+  const [movies, setMovies] = useState<Instance<typeof MovieModel>[]>([]);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
   // const fetchMovieData = async () => {
@@ -83,7 +77,7 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
     <View>
       <Animated.FlatList
         data={movies}
-        keyExtractor={(movie: MovieItemInterface) => movie.key}
+        keyExtractor={(movie) => movie.key}
         horizontal
         showsHorizontalScrollIndicator={false}
         snapToInterval={ITEM_WIDTH}
@@ -93,14 +87,14 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
           { useNativeDriver: true }
         )}
-        renderItem={(movie) => {
-          if (!movie.item.poster) {
+        renderItem={({ item: movie, index }) => {
+          if (!movie.poster) {
             return <View style={{ width: 45 }}></View>;
           }
           const inputRange = [
-            (movie.index - 2) * ITEM_WIDTH,
-            (movie.index - 1) * ITEM_WIDTH,
-            movie.index * ITEM_WIDTH,
+            (index - 2) * ITEM_WIDTH,
+            (index - 1) * ITEM_WIDTH,
+            index * ITEM_WIDTH,
           ];
           const translateY = scrollX.interpolate({
             inputRange,
@@ -111,7 +105,7 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
               activeOpacity={0.5}
               style={{ marginTop: 130 }}
               onPress={() => {
-                store.setSelectedMovie(movie.item.key);
+                store.setSelectedMovie(movie.key);
                 navigation.navigate("Details");
               }}
             >

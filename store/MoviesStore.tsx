@@ -3,11 +3,11 @@ import { getFilteredMovies, getMovies, getMoviesByGenre } from "../api/api";
 import { API_KEY } from "../config";
 
 const GenreModel = types.model({
-  key: types.number,
-  genre: types.string,
+  id: types.identifierNumber,
+  name: types.string,
 });
 
-const MovieModel = types
+export const MovieModel = types
   .model("Movie", {
     key: types.identifier,
     title: types.string,
@@ -16,7 +16,9 @@ const MovieModel = types
     rating: types.number,
     description: types.string,
     releaseDate: types.maybe(types.string),
-    genres: types.array(GenreModel),
+    genre_ids: types.array(
+      types.safeReference(GenreModel, { acceptsUndefined: false })
+    ),
   })
   .actions((self) => {
     return {
@@ -29,6 +31,7 @@ const MovieModel = types
 
 const MovieStore = types
   .model("MovieStore", {
+    allGenres: types.map(GenreModel),
     allMovies: types.map(MovieModel),
 
     selectedMovie: types.safeReference(MovieModel),
@@ -41,6 +44,7 @@ const MovieStore = types
     filteredMoviesByGenre: types.array(
       types.safeReference(MovieModel, { acceptsUndefined: false })
     ),
+    oneFatNothing: "",
   })
   .views((self) => {
     return {
@@ -59,8 +63,26 @@ const MovieStore = types
       return Array.isArray(data) ? mapped : mapped[0];
     },
   }))
+
+  .actions((self) => ({
+    processGenre(data: any): any {
+      const dataList = Array.from(data);
+      const mapped = dataList.map((e: any) => {
+        return self.allGenres.put(e);
+      });
+      return Array.isArray(data) ? mapped : mapped[0];
+    },
+  }))
   .actions((self) => {
     return {
+      fetchGenreList: flow(function* fetchGenreList() {
+        const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
+
+        const data = yield fetch(url).then((r) => r.json());
+
+        return self.processGenre(data.genres);
+      }),
+
       fetchData: flow(function* fetchData() {
         const moviesListData = yield getMovies();
         for (let movie of moviesListData) {
@@ -70,6 +92,9 @@ const MovieStore = types
       }),
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;
+      },
+      setOneFatNothing(name: string) {
+        self.oneFatNothing = name;
       },
       addFavoriteMovie(movieKey: any) {
         self.favoriteMoviesList.push(movieKey);

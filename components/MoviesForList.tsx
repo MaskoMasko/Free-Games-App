@@ -1,31 +1,46 @@
+import { NavigationProp } from "@react-navigation/native";
+import { observer } from "mobx-react-lite";
+import { Instance } from "mobx-state-tree";
 import React from "react";
 import { Image, StyleSheet, Text, View, Animated } from "react-native";
+import { MovieModel, store } from "../store/MoviesStore";
 import { MovieRating } from "./MovieRating";
 
-export const MoviesForList = ({ movie, translateY, navigation }: any) => {
+export const MoviesForList = observer(function MoviesForList({
+  movie,
+  translateY,
+  navigation,
+}: {
+  movie: Instance<typeof MovieModel>;
+  translateY: Animated.AnimatedInterpolation;
+  navigation: NavigationProp<any>;
+}) {
   return (
     <Animated.View
-      key={movie.item.key}
+      key={movie.key}
       style={[styles.movieContainer, { transform: [{ translateY }] }]}
     >
       <Image
         style={styles.moviePoster}
-        source={{ uri: `${movie.item.poster}` }}
+        source={{ uri: `${movie.poster}` }}
       ></Image>
       <Text style={[styles.movieShortDescription, { marginBottom: 10 }]}>
-        {movie.item.title}
+        {movie.title}
       </Text>
       <MovieRating movie={movie}></MovieRating>
       <View style={{ flexDirection: "row", alignSelf: "center" }}>
-        {movie.item.genres.map((genre: any, index: number) => {
+        {movie.genre_ids.map((genre, index: number) => {
           if (index < 2) {
             return (
               <Text
                 key={index}
                 style={styles.movieGenres}
-                onPress={() => navigation.navigate("Genres")}
+                onPress={() => {
+                  store.setOneFatNothing(genre.name);
+                  navigation.navigate("Genres");
+                }}
               >
-                {genre.genre}
+                {genre.name}
               </Text>
             );
           }
@@ -33,11 +48,11 @@ export const MoviesForList = ({ movie, translateY, navigation }: any) => {
         })}
       </View>
       <Text numberOfLines={3} style={styles.movieDescText}>
-        {movie.item.description}
+        {movie.description}
       </Text>
     </Animated.View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   movieContainer: {

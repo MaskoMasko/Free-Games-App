@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-export const MovieRating = ({ movie }: { movie: any }) => {
+export const MovieRating = ({ movie }: { movie: { rating: number } }) => {
   return (
     <View style={{ alignSelf: "center", flexDirection: "row" }}>
       <Text
@@ -11,12 +11,11 @@ export const MovieRating = ({ movie }: { movie: any }) => {
           marginBottom: 5,
         }}
       >
-        {movie.item.rating}
+        {movie.rating}
       </Text>
       <Image
         source={{
-          uri:
-            "https://www.iconsdb.com/icons/preview/color/FCC203/star-2-xxl.png",
+          uri: "https://www.iconsdb.com/icons/preview/color/FCC203/star-2-xxl.png",
         }}
         style={{ width: 30, height: 30 }}
       ></Image>
