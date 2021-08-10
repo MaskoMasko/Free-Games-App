@@ -6,6 +6,17 @@ const getImagePath = (path: string) =>
 const getBackdropPath = (path: string) =>
   `https://image.tmdb.org/t/p/w370_and_h556_multi_faces${path}`;
 
+interface BeforeMovieInterface {
+  id: number;
+  original_title: string;
+  poster_path: string;
+  backdrop_path: string;
+  vote_average: number;
+  overview: string;
+  release_date: string;
+  genre_ids: number[];
+}
+
 export const getMovies = async () => {
   const { results } = await fetch(API_URL).then((x) => x.json());
   const movies = results.map(
@@ -18,16 +29,7 @@ export const getMovies = async () => {
       overview,
       release_date,
       genre_ids,
-    }: {
-      id: number;
-      original_title: string;
-      poster_path: string;
-      backdrop_path: string;
-      vote_average: number;
-      overview: string;
-      release_date: string;
-      genre_ids: any[];
-    }) => ({
+    }: BeforeMovieInterface) => ({
       key: String(id),
       title: original_title,
       poster: getImagePath(poster_path),
@@ -53,17 +55,7 @@ export const getFilteredMovies = async (url: string) => {
       overview,
       release_date,
       genre_ids,
-    }: {
-      id: number;
-      original_title: string;
-      poster_path: string;
-      backdrop_path: string;
-      vote_average: number;
-      overview: string;
-      release_date: string;
-      // genre_ids: GenreId[];
-      genre_ids: any[];
-    }) => ({
+    }: BeforeMovieInterface) => ({
       key: String(id),
       title: original_title,
       poster: getImagePath(poster_path),
@@ -71,12 +63,6 @@ export const getFilteredMovies = async (url: string) => {
       rating: vote_average,
       description: overview,
       releaseDate: release_date,
-      //tu rabi dojti niki key value idk kako se stavi
-      // genres: genre_ids.map((genre) => {
-      //   for (let g of genres) {
-      //     if (genre == g.key) return g;
-      //   }
-      // }),
       genre_ids: genre_ids,
     })
   );
@@ -95,17 +81,7 @@ export const getMoviesByGenre = async (url: string) => {
       overview,
       release_date,
       genre_ids,
-    }: {
-      id: number;
-      original_title: string;
-      poster_path: string;
-      backdrop_path: string;
-      vote_average: number;
-      overview: string;
-      release_date: string;
-      // genre_ids: GenreId[];
-      genre_ids: any[];
-    }) => ({
+    }: BeforeMovieInterface) => ({
       key: String(id),
       title: original_title,
       poster: getImagePath(poster_path),
@@ -113,7 +89,6 @@ export const getMoviesByGenre = async (url: string) => {
       rating: vote_average,
       description: overview,
       releaseDate: release_date,
-      //tu rabi dojti niki key value idk kako se stavi
       genre_ids: genre_ids,
     })
   );
