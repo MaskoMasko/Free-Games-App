@@ -7,6 +7,7 @@ import { HomeScreen } from "./screens/HomeScreen";
 import { FavoritesScreen } from "./screens/FavoriteMoviesScreen";
 import { MovieDetailsScreen } from "./screens/MovieDetailsScreen";
 import { FilterMoviesScreen } from "./screens/FilterMoviesScreen";
+import { FilteredByGenreScreen } from "./screens/FilteredByGenreScreen";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,11 @@ export default function App() {
             name="Details"
             component={MovieDetailsScreen}
             options={{ title: "Movie Details" }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Genres"
+            component={FilteredByGenreScreen}
+            options={{ title: "Genre Movies" }}
           ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

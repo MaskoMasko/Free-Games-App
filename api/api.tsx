@@ -129,3 +129,44 @@ export const getFilteredMovies = async (url: string) => {
   );
   return movies;
 };
+
+export const getMoviesByGenre = async (url: string) => {
+  const { results } = await fetch(url).then((x) => x.json());
+  const movies = results.map(
+    ({
+      id,
+      original_title,
+      poster_path,
+      backdrop_path,
+      vote_average,
+      overview,
+      release_date,
+      genre_ids,
+    }: {
+      id: number;
+      original_title: string;
+      poster_path: string;
+      backdrop_path: string;
+      vote_average: number;
+      overview: string;
+      release_date: string;
+      // genre_ids: GenreId[];
+      genre_ids: any[];
+    }) => ({
+      key: String(id),
+      title: original_title,
+      poster: getImagePath(poster_path),
+      backdrop: getBackdropPath(backdrop_path),
+      rating: vote_average,
+      description: overview,
+      releaseDate: release_date,
+      //tu rabi dojti niki key value idk kako se stavi
+      genres: genre_ids.map((genre) => {
+        for (let g of genres) {
+          if (genre == g.key) return g;
+        }
+      }),
+    })
+  );
+  return movies;
+};

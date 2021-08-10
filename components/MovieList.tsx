@@ -116,6 +116,7 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
               }}
             >
               <MoviesForList
+                navigation={navigation}
                 movie={movie}
                 translateY={translateY}
               ></MoviesForList>

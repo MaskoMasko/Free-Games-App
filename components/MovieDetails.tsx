@@ -15,7 +15,7 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
             <Text
               style={styles.movieGenres}
               key={index}
-              onPress={() => console.log(genre.key)}
+              onPress={() => navigation.navigate("Genres")}
             >
               {genre.genre}
             </Text>

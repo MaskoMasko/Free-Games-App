@@ -2,7 +2,7 @@ import React from "react";
 import { Image, StyleSheet, Text, View, Animated } from "react-native";
 import { MovieRating } from "./MovieRating";
 
-export const MoviesForList = ({ movie, translateY }: any) => {
+export const MoviesForList = ({ movie, translateY, navigation }: any) => {
   return (
     <Animated.View
       key={movie.item.key}
@@ -23,7 +23,7 @@ export const MoviesForList = ({ movie, translateY }: any) => {
               <Text
                 key={index}
                 style={styles.movieGenres}
-                onPress={() => console.log(genre.key)}
+                onPress={() => navigation.navigate("Genres")}
               >
                 {genre.genre}
               </Text>
