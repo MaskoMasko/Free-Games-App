@@ -16,7 +16,7 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
               style={styles.movieGenres}
               key={index}
               onPress={() => {
-                store.setOneFatNothing(genre.name);
+                store.setOneFatNothing(genre);
                 navigation.navigate("Genres");
               }}
             >

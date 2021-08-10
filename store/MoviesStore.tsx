@@ -44,7 +44,8 @@ const MovieStore = types
     filteredMoviesByGenre: types.array(
       types.safeReference(MovieModel, { acceptsUndefined: false })
     ),
-    oneFatNothing: "",
+    oneFatNothing: 0,
+    oneFatNothing2: "",
   })
   .views((self) => {
     return {
@@ -93,8 +94,9 @@ const MovieStore = types
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;
       },
-      setOneFatNothing(name: string) {
-        self.oneFatNothing = name;
+      setOneFatNothing(genre: any) {
+        self.oneFatNothing = genre.id;
+        self.oneFatNothing2 = genre.name;
       },
       addFavoriteMovie(movieKey: any) {
         self.favoriteMoviesList.push(movieKey);
@@ -123,7 +125,7 @@ const MovieStore = types
         for (let i = 0; i < moviesListData.length; i++) {
           self.allMovies.put(moviesListData[i]);
         }
-        self.filteredMovies = moviesListData.map(
+        self.filteredMoviesByGenre = moviesListData.map(
           (movie: { key: string }) => movie.key
         );
         return self.process(moviesListData);
