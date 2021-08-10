@@ -10,7 +10,7 @@ export const FilteredByGenreScreen = observer(({ navigation }: any) => {
       <View style={{ flexDirection: "row" }}>
         <Text style={styles.movieGenres}>{store.oneFatNothing2}</Text>
       </View>
-      <FilterGenreList></FilterGenreList>
+      <FilterGenreList navigation={navigation}></FilterGenreList>
     </View>
   );
 });

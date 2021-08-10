@@ -1,10 +1,10 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Text, View, Image, ScrollView } from "react-native";
+import { Text, View, Image, ScrollView, TouchableOpacity } from "react-native";
 import { useQuery } from "react-query";
 import { store } from "../store/MoviesStore";
 
-export const FilterGenreList = observer(() => {
+export const FilterGenreList = observer(({ navigation }: any) => {
   const { isLoading, isError, isIdle, data, isSuccess } = useQuery(
     ["FilteredMovies", store.oneFatNothing],
     async () => {
@@ -20,13 +20,20 @@ export const FilterGenreList = observer(() => {
     <ScrollView>
       {store.filteredMoviesByGenre.map((movie) => {
         return (
-          <View key={movie.key}>
+          <TouchableOpacity
+            key={movie.key}
+            activeOpacity={0.5}
+            onPress={() => {
+              store.setSelectedMovie(movie);
+              navigation.navigate("Details");
+            }}
+          >
             <Image
               source={{ uri: movie.poster }}
               style={{ width: 300, height: 450 }}
             ></Image>
             <Text>{movie.title}</Text>
-          </View>
+          </TouchableOpacity>
         );
       })}
     </ScrollView>
