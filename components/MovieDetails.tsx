@@ -1,8 +1,9 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { store } from "../store/MoviesStore";
 import { CustomButton } from "./CustomButton";
+import { styles } from "../styles/styles";
 
 export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
   return (
@@ -57,24 +58,4 @@ export const MovieDetails = observer(({ navigation }: { navigation: any }) => {
       </View>
     </ScrollView>
   );
-});
-
-const styles = StyleSheet.create({
-  mainHeader: {
-    fontSize: 32,
-    margin: 10,
-    fontWeight: "bold",
-    marginBottom: 30,
-  },
-  movieGenres: {
-    padding: 5,
-    paddingHorizontal: 7,
-    margin: 5,
-    borderRadius: 15,
-    color: "orange",
-    borderWidth: 1,
-    borderColor: "orange",
-  },
-  detailsText: { fontSize: 20, margin: 10 },
-  imageStyle: { width: 370, height: 500, alignSelf: "center", margin: 20 },
 });

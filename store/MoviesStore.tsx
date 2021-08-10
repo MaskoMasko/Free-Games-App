@@ -2,51 +2,55 @@ import { flow, getRoot, types } from "mobx-state-tree";
 import { getFilteredMovies, getMovies, getMoviesByGenre } from "../api/api";
 import { API_KEY } from "../config";
 
-const GenreModel = types.model({
-  id: types.identifierNumber,
-  name: types.string,
+const {
+  string,
+  identifierNumber,
+  model,
+  number,
+  array,
+  safeReference,
+  identifier,
+  map,
+} = types;
+
+const GenreModel = model({
+  id: identifierNumber,
+  name: string,
 });
 
-export const MovieModel = types
-  .model("Movie", {
-    key: types.identifier,
-    title: types.string,
-    poster: types.string,
-    backdrop: types.string,
-    rating: types.number,
-    description: types.string,
-    releaseDate: types.maybe(types.string),
-    genre_ids: types.array(
-      types.safeReference(GenreModel, { acceptsUndefined: false })
-    ),
-  })
-  .actions((self) => {
-    return {
-      addToFavorites() {
-        const root: any = getRoot(self);
-        root.addFavoriteMovie(self.key);
-      },
-    };
-  });
+export const MovieModel = model("Movie", {
+  key: identifier,
+  title: string,
+  poster: string,
+  backdrop: string,
+  rating: number,
+  description: string,
+  releaseDate: string,
+  genre_ids: array(safeReference(GenreModel, { acceptsUndefined: false })),
+}).actions((self) => {
+  return {
+    addToFavorites() {
+      const root: any = getRoot(self);
+      root.addFavoriteMovie(self.key);
+    },
+  };
+});
 
-const MovieStore = types
-  .model("MovieStore", {
-    allGenres: types.map(GenreModel),
-    allMovies: types.map(MovieModel),
+const MovieStore = model("MovieStore", {
+  allGenres: map(GenreModel),
+  allMovies: map(MovieModel),
 
-    selectedMovie: types.safeReference(MovieModel),
-    favoriteMoviesList: types.array(
-      types.safeReference(MovieModel, { acceptsUndefined: false })
-    ),
-    filteredMovies: types.array(
-      types.safeReference(MovieModel, { acceptsUndefined: false })
-    ),
-    filteredMoviesByGenre: types.array(
-      types.safeReference(MovieModel, { acceptsUndefined: false })
-    ),
-    oneFatNothing: 0,
-    oneFatNothing2: "",
-  })
+  selectedMovie: safeReference(MovieModel),
+  favoriteMoviesList: array(
+    safeReference(MovieModel, { acceptsUndefined: false })
+  ),
+  filteredMovies: array(safeReference(MovieModel, { acceptsUndefined: false })),
+  filteredMoviesByGenre: array(
+    safeReference(MovieModel, { acceptsUndefined: false })
+  ),
+  genreId: 0,
+  genreName: "",
+})
   .views((self) => {
     return {
       get movieList() {
@@ -95,8 +99,8 @@ const MovieStore = types
         self.selectedMovie = movieKey;
       },
       setOneFatNothing(genre: any) {
-        self.oneFatNothing = genre.id;
-        self.oneFatNothing2 = genre.name;
+        self.genreId = genre.id;
+        self.genreName = genre.name;
       },
       addFavoriteMovie(movieKey: any) {
         self.favoriteMoviesList.push(movieKey);

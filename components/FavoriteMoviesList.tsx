@@ -1,8 +1,8 @@
-import React from "react";
-import { Text, View, Button, TouchableOpacity } from "react-native";
 import { observer } from "mobx-react-lite";
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { store } from "../store/MoviesStore";
-import { CustomButton } from "./CustomButton";
+import { styles } from "../styles/styles";
 
 export const FavoriteMoviesList = observer(() => {
   return (
@@ -12,26 +12,9 @@ export const FavoriteMoviesList = observer(() => {
           return (
             <View
               key={index}
-              style={{
-                width: 370,
-                backgroundColor: "orange",
-                margin: 20,
-                minHeight: 50,
-                borderRadius: 10,
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
+              style={[styles.favListItemContainer, { marginBottom: 0 }]}
             >
-              <Text
-                style={{
-                  color: "white",
-                  fontWeight: "bold",
-                  fontSize: 18,
-                  alignSelf: "center",
-                  marginLeft: 10,
-                  width: 200,
-                }}
-              >
+              <Text style={styles.favListItemText}>
                 {movie?.title.toUpperCase()}
               </Text>
               <TouchableOpacity
@@ -39,38 +22,15 @@ export const FavoriteMoviesList = observer(() => {
                 onPress={() => {
                   store.removeFavoriteMovie(index);
                 }}
-                style={{
-                  backgroundColor: "black",
-                  marginRight: 10,
-                  marginVertical: 5,
-                  borderRadius: 5,
-                  width: 100,
-                  justifyContent: "center",
-                }}
+                style={styles.removeButton}
               >
-                <Text
-                  style={{
-                    color: "white",
-                    fontWeight: "bold",
-                    alignSelf: "center",
-                  }}
-                >
-                  REMOVE
-                </Text>
+                <Text style={styles.removeButtonText}>REMOVE</Text>
               </TouchableOpacity>
             </View>
           );
         })
       ) : (
-        <Text
-          style={{
-            fontSize: 24,
-            fontWeight: "bold",
-            textAlign: "center",
-            width: 350,
-            marginTop: 300,
-          }}
-        >
+        <Text style={styles.noItemsInList}>
           You haven't added any movie to the list...
         </Text>
       )}

@@ -1,14 +1,14 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Text, View, Image, ScrollView, TouchableOpacity } from "react-native";
+import { Image, ScrollView, Text, TouchableOpacity } from "react-native";
 import { useQuery } from "react-query";
 import { store } from "../store/MoviesStore";
 
 export const FilterGenreList = observer(({ navigation }: any) => {
   const { isLoading, isError, isIdle, data, isSuccess } = useQuery(
-    ["FilteredMovies", store.oneFatNothing],
+    ["FilteredMovies", store.genreId],
     async () => {
-      const sacekaj = await store.fetchMoviesByGenre(store.oneFatNothing);
+      const sacekaj = await store.fetchMoviesByGenre(store.genreId);
       //it works sa samo rijci umisto value
       return sacekaj;
     }

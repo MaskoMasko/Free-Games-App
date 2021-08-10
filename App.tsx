@@ -27,13 +27,15 @@ export default function App() {
                   <Drawer.Screen
                     name="Home"
                     component={HomeScreen}
-                    options={{ title: "Movies go YES" }}
+                    options={{ title: "Movies Store" }}
                   />
                   <Drawer.Screen
                     name="Favorites"
+                    options={{ title: "Favorite Movies" }}
                     component={FavoritesScreen}
                   ></Drawer.Screen>
                   <Drawer.Screen
+                    options={{ title: "Filter Movies" }}
                     name="Filter"
                     component={FilterMoviesScreen}
                   ></Drawer.Screen>

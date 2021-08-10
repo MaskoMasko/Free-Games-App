@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import { styles } from "../styles/styles";
 
 export const CustomButton = ({
   title,
@@ -20,12 +21,3 @@ export const CustomButton = ({
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  customButton: {
-    margin: 10,
-    padding: 10,
-    borderRadius: 10,
-    fontWeight: "bold",
-  },
-});
