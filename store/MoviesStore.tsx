@@ -82,6 +82,7 @@ const MovieStore = types
         self.filteredMovies = moviesListData.map(
           (movie: { key: string }) => movie.key
         );
+        return self.process(moviesListData);
       }),
     };
   });

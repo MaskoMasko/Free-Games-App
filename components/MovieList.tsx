@@ -24,15 +24,15 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
   const [movies, setMovies] = useState<any>([]);
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
-  const fetchMovieData = async () => {
-    const thismovies = await store.fetchData();
-    setMovies([
-      { key: "left-spacer" },
-      ...store.movieList,
-      { key: "right-spacer" },
-    ]);
-    // movies.map((e: Movie) => console.log(e.genres));
-  };
+  // const fetchMovieData = async () => {
+  //   const thismovies = await store.fetchData();
+  //   setMovies([
+  //     { key: "left-spacer" },
+  //     ...store.movieList,
+  //     { key: "right-spacer" },
+  //   ]);
+  //   // movies.map((e: Movie) => console.log(e.genres));
+  // };
   // useEffect(() => {
   //   fetchMovieData();
   //   // store.fetchData();
@@ -57,7 +57,9 @@ export const MovieList = observer(({ navigation }: { navigation: any }) => {
       <View
         style={{ padding: 32, alignItems: "center", justifyContent: "center" }}
       >
-        <Text>Something went wrong :(</Text>
+        <Text style={{ fontSize: 30, margin: 50, fontWeight: "bold" }}>
+          Something went wrong :(
+        </Text>
       </View>
     );
   }
