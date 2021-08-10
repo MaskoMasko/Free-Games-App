@@ -1,19 +1,17 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { NavigationProp } from "@react-navigation/core";
 import { observer } from "mobx-react-lite";
 import React from "react";
 import {
+  Image,
+  ScrollView,
   Text,
   TextInput,
-  View,
-  ScrollView,
-  Image,
   TouchableOpacity,
-  Button,
+  View,
 } from "react-native";
-import { store } from "../store/MoviesStore";
-import { useQuery, useMutation } from "react-query";
+import { useQuery } from "react-query";
 import { useDebounced } from "../hooks/useDebounced";
+import { store } from "../store/MoviesStore";
 
 export const FilterMovies = observer(
   ({ navigation }: { navigation: NavigationProp<any> }) => {
@@ -22,11 +20,10 @@ export const FilterMovies = observer(
 
     const { isLoading, isError, isIdle, data } = useQuery(
       ["FilteredMovies", search],
-      async () => {
+      () => {
         if (search === "") return;
-        const sacekaj = await store.fetchFilteredMovies(search);
+        return store.fetchFilteredMovies(search);
         //it works sa samo rijci umisto value
-        return sacekaj;
       }
     );
 
