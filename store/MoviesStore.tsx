@@ -42,6 +42,15 @@ const MovieStore = types
       },
     };
   })
+  .actions((self) => ({
+    process(data: any): any {
+      const dataList = Array.from(data);
+      const mapped = dataList.map((e: any) => {
+        return self.allMovies.put(e);
+      });
+      return Array.isArray(data) ? mapped : mapped[0];
+    },
+  }))
   .actions((self) => {
     return {
       fetchData: flow(function* fetchData() {
@@ -49,6 +58,7 @@ const MovieStore = types
         for (let movie of moviesListData) {
           self.allMovies.put(movie);
         }
+        return self.process(moviesListData);
       }),
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;

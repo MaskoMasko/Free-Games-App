@@ -16,7 +16,7 @@ export const FavoriteMoviesList = observer(() => {
                 width: 370,
                 backgroundColor: "orange",
                 margin: 20,
-                height: 50,
+                minHeight: 50,
                 borderRadius: 10,
                 flexDirection: "row",
                 justifyContent: "space-between",
@@ -29,6 +29,7 @@ export const FavoriteMoviesList = observer(() => {
                   fontSize: 18,
                   alignSelf: "center",
                   marginLeft: 10,
+                  width: 200,
                 }}
               >
                 {movie?.title.toUpperCase()}
