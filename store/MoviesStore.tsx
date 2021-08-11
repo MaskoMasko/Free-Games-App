@@ -103,9 +103,11 @@ const MovieStore = model("MovieStore", {
         self.genrePageNumber += 1;
       },
       decreasePageNumber() {
+        if (self.pageNumber == 1) return;
         self.pageNumber -= 1;
       },
       decreaseGenrePageNumber() {
+        if (self.genrePageNumber == 1) return;
         self.genrePageNumber -= 1;
       },
       fetchGenreList: flow(function* fetchGenreList() {

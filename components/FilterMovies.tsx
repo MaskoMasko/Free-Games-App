@@ -19,7 +19,8 @@ export const FilterMovies = observer(
       () => {
         if (search === "") return;
         return store.fetchFilteredMovies(search);
-      }
+      },
+      { keepPreviousData: true }
     );
     return (
       <View style={{ marginBottom: 400, width: "100%" }}>
@@ -43,7 +44,7 @@ export const FilterMovies = observer(
           isError={isError}
           isLoading={isLoading}
           isIdle={isIdle}
-          moviesData={store.filteredMovies}
+          moviesData={data}
         ></FilterAndGenreList>
         <View style={{ flexDirection: "row", alignSelf: "center" }}>
           <CustomButton

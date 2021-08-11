@@ -14,7 +14,8 @@ export const FilterGenre = observer(
       ["FilteredMovies", store.genreId, store.genrePageNumber],
       () => {
         return store.fetchMoviesByGenre(store.genreId);
-      }
+      },
+      { keepPreviousData: true }
     );
     return (
       <View style={{ marginBottom: 300 }}>
@@ -23,7 +24,7 @@ export const FilterGenre = observer(
           isError={isError}
           isLoading={isLoading}
           isIdle={isIdle}
-          moviesData={store.filteredMoviesByGenre}
+          moviesData={data}
         ></FilterAndGenreList>
         <View style={{ flexDirection: "row", alignSelf: "center" }}>
           <CustomButton

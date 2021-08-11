@@ -1,5 +1,46 @@
 import { StyleSheet } from "react-native";
 
+// const palette = {
+//   purpleLight: '#8C6FF7',
+//   purplePrimary: '#5A31F4',
+//   purpleDark: '#3F22AB',
+
+//   greenLight: '#56DCBA',
+//   greenPrimary: '#0ECD9D',
+//   greenDark: '#0A906E',
+
+//   black: '#0B0B0B',
+//   white: '#F0F2F3',
+// };
+
+// /**
+//  * small = 10, medium = 16 large = 35
+//  */
+// const fontSizeSmall = 10
+// /**
+//  * small = 10, medium = 16 large = 35
+//  */
+// const fontSizeMedium = 10
+// /**
+//  * small = 10, medium = 16 large = 35
+//  */
+// const fontSizeLarge = 10
+
+// fontSizeLarge
+
+// const theme = {
+//   colors: {
+//     mainBackground: palette.white,
+//     cardPrimaryBackground: palette.purplePrimary,
+//   },
+//   spacingSmall: {
+//     s: 8,
+//     m: 16,
+//     l: 24,
+//     xl: 40,
+//   },
+// };
+
 export const styles = StyleSheet.create({
   customButton: {
     margin: 10,

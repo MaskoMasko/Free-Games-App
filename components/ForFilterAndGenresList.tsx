@@ -16,7 +16,9 @@ export const FilterAndGenreList = observer(
           <View style={styles.errorAndLoadingViews}>
             <Text style={styles.errorAndLoading}>Loading...</Text>
           </View>
-        ) : isIdle ? null : (
+        ) : isIdle ? null : moviesData == false || !moviesData ? (
+          <Text>Full of air... Just like your MOM!</Text>
+        ) : (
           <FlatList
             data={moviesData}
             keyExtractor={(movie) => movie.key}
