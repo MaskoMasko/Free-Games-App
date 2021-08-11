@@ -1,10 +1,14 @@
 import React from "react";
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import { useQuery } from "react-query";
 import { MovieList } from "../components/MovieList";
 import { store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
 import { NavigationProp } from "@react-navigation/core";
+import Text from "../styles/Text";
+import theme from "../styles/theme";
+
+const { spacing, colors } = theme;
 
 export function HomeScreen({
   navigation,
@@ -25,7 +29,7 @@ export function HomeScreen({
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.mainHeader, { marginBottom: -50, marginTop: 70 }]}>
+      <Text variant="mainHeader" mt="max" mb="minus" fontSize={spacing.xl}>
         Top Movies
       </Text>
       <MovieList navigation={navigation}></MovieList>
