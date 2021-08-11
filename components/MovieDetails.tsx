@@ -1,17 +1,26 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 import { store } from "../store/MoviesStore";
 import { CustomButton } from "./CustomButton";
 import { NavigationProp } from "@react-navigation/core";
 import { styles } from "../styles/styles";
+import Text from "../styles/Text";
+import theme from "../styles/theme";
+
+const { spacing } = theme;
 
 export const MovieDetails = observer(
   ({ navigation }: { navigation: NavigationProp<any> }) => {
     return (
       <ScrollView style={{ height: "100%", width: "100%" }}>
-        <Text style={styles.mainHeader}>{store.selectedMovie?.title}</Text>
-        <Text style={styles.detailsText}> Genres:</Text>
+        <Text variant="boldText" fontSize={spacing.xl} m="m">
+          {store.selectedMovie?.title}
+        </Text>
+        <Text fontSize={spacing.l} m="s">
+          {" "}
+          Genres:
+        </Text>
         <View
           style={{ flexDirection: "row", flexWrap: "wrap", marginLeft: 10 }}
         >
@@ -34,11 +43,13 @@ export const MovieDetails = observer(
           source={{ uri: store.selectedMovie?.poster }}
           style={styles.imageStyle}
         ></Image>
-        <Text style={styles.detailsText}>
+        <Text fontSize={spacing.l} mx="s">
           Release Date: {store.selectedMovie?.releaseDate}
         </Text>
-        <Text style={[styles.detailsText, { marginBottom: 0 }]}>Summary</Text>
-        <Text style={{ fontSize: 15, margin: 10 }}>
+        <Text fontSize={spacing.l} mx="s" mb="0">
+          Summary
+        </Text>
+        <Text fontSize={spacing.m} m="s" mt="0">
           {store.selectedMovie?.description}
         </Text>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>

@@ -23,18 +23,26 @@ const theme = createTheme({
     s: 8,
     m: 16,
     l: 24,
-    xl: 40,
-    xxl: 60,
-    max: 100,
-    minus: -50,
+    xl: 32,
+    xxl: 40,
+    "100": 100,
+    "-50": -50,
+    "50": 50,
+    "-100": -100,
+    "0": 0,
   },
   breakpoints: {
     phone: 0,
     tablet: 768,
   },
   textVariants: {
-    mainHeader: {
+    boldText: {
       fontWeight: "bold",
+    },
+    errorAndLoadingViews: {
+      padding: 32,
+      alignItems: "center",
+      justifyContent: "center",
     },
   },
 });

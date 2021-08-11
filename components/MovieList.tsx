@@ -2,13 +2,16 @@ import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import React, { useState } from "react";
 import { NavigationProp } from "@react-navigation/core";
-import { Animated, Text, TouchableOpacity, View } from "react-native";
+import { Animated, TouchableOpacity, View } from "react-native";
 import { useQuery } from "react-query";
 import { MovieModel, store } from "../store/MoviesStore";
 import { MoviesForList } from "./MoviesForList";
 import { styles } from "../styles/styles";
+import Text from "../styles/Text";
+import theme from "../styles/theme";
 // import _ from "lodash";
 
+const { spacing } = theme;
 const ITEM_WIDTH = 320;
 
 export const MovieList = observer(function MovieList({
@@ -29,10 +32,8 @@ export const MovieList = observer(function MovieList({
 
   if (isError) {
     return (
-      <View
-        style={styles.errorAndLoadingViews}
-      >
-        <Text style={styles.errorAndLoading}>
+      <View style={styles.errorAndLoadingViews}>
+        <Text variant="boldText" fontSize={spacing.l}>
           Something went wrong :(
         </Text>
       </View>
@@ -40,10 +41,8 @@ export const MovieList = observer(function MovieList({
   }
   if (isLoading) {
     return (
-      <View
-        style={styles.errorAndLoadingViews}
-      >
-        <Text style={styles.errorAndLoading}>
+      <View style={styles.errorAndLoadingViews}>
+        <Text variant="boldText" fontSize={spacing.l} mt="50">
           Loading...
         </Text>
       </View>

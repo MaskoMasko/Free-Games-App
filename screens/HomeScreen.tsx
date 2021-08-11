@@ -29,7 +29,7 @@ export function HomeScreen({
 
   return (
     <View style={styles.container}>
-      <Text variant="mainHeader" mt="max" mb="minus" fontSize={spacing.xl}>
+      <Text variant="boldText" mt="100" mb="-50" fontSize={spacing.xl}>
         Top Movies
       </Text>
       <MovieList navigation={navigation}></MovieList>
