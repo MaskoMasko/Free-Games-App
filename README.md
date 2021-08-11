@@ -7,3 +7,5 @@ things to do:
 -active gledas idk
 
 po mogucnosti cili api file staviti u store ali zasad neka stoji
+
+moren koristiti react elements jako je kul ima kompp ke ti rabe believe:!:!:!:!:!
