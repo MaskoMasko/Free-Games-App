@@ -17,7 +17,16 @@ export const FilterAndGenreList = observer(
             <Text style={styles.errorAndLoading}>Loading...</Text>
           </View>
         ) : isIdle ? null : moviesData == false || !moviesData ? (
-          <Text>Full of air... Just like your MOM!</Text>
+          <Text
+            style={{
+              marginVertical: 50,
+              fontSize: 26,
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            No Movies...Try Something Else!
+          </Text>
         ) : (
           <FlatList
             data={moviesData}

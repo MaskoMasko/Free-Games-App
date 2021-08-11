@@ -97,9 +97,11 @@ const MovieStore = model("MovieStore", {
         self.favoriteMoviesList.splice(id, 1);
       },
       increasePageNumber() {
+        if (self.filteredMovies.length == 0) return;
         self.pageNumber += 1;
       },
       increaseGenrePageNumber() {
+        if (self.filteredMoviesByGenre.length == 0) return;
         self.genrePageNumber += 1;
       },
       decreasePageNumber() {
