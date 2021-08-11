@@ -2,11 +2,14 @@ import { NavigationProp } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import React from "react";
-import { Image, Text, View, Animated, TouchableHighlight } from "react-native";
+import { Image, View, Animated, TouchableHighlight } from "react-native";
 import { MovieModel, store } from "../store/MoviesStore";
 import { MovieRating } from "./MovieRating";
 import { styles } from "../styles/styles";
+import Text from "../styles/Text";
+import theme from "../styles/theme";
 
+const { spacing } = theme;
 export const MoviesForList = observer(function MoviesForList({
   movie,
   translateY,
@@ -25,7 +28,7 @@ export const MoviesForList = observer(function MoviesForList({
         style={styles.moviePoster}
         source={{ uri: `${movie.poster}` }}
       ></Image>
-      <Text style={[styles.movieShortDescription, { marginBottom: 10 }]}>
+      <Text variant="boldText" fontSize={spacing.l} textAlign="center">
         {movie.title}
       </Text>
       <MovieRating movie={movie}></MovieRating>
