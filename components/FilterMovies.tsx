@@ -13,7 +13,6 @@ export const FilterMovies = observer(
   ({ navigation }: { navigation: NavigationProp<any> }) => {
     const [value, setValue] = React.useState("");
     const search = useDebounced(value, 1000);
-    
 
     const { isLoading, isError, isIdle, data } = useQuery(
       ["FilteredMovies", search, store.pageNumber],
