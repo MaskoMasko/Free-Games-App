@@ -40,6 +40,7 @@ export const MoviesForList = observer(function MoviesForList({
                 key={index}
                 style={styles.movieGenres}
                 onPress={() => {
+                  store.resetGenrePageNumber();
                   store.setGenre(genre);
                   navigation.navigate("Genres");
                 }}

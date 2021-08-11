@@ -13,6 +13,7 @@ export const FilterMovies = observer(
   ({ navigation }: { navigation: NavigationProp<any> }) => {
     const [value, setValue] = React.useState("");
     const search = useDebounced(value, 1000);
+    
 
     const { isLoading, isError, isIdle, data } = useQuery(
       ["FilteredMovies", search, store.pageNumber],
@@ -25,8 +26,10 @@ export const FilterMovies = observer(
     return (
       <View style={{ marginBottom: 400, width: "100%" }}>
         <TextInput
-          value={value}
-          onChangeText={(e) => setValue(e)}
+          onSubmitEditing={(e) => {
+            store.resetPageNumber();
+            setValue(e.nativeEvent.text);
+          }}
           placeholder="go yes"
           style={{
             marginTop: 140,

@@ -112,6 +112,12 @@ const MovieStore = model("MovieStore", {
         if (self.genrePageNumber == 1) return;
         self.genrePageNumber -= 1;
       },
+      resetGenrePageNumber() {
+        self.genrePageNumber = 1;
+      },
+      resetPageNumber() {
+        self.pageNumber = 1;
+      },
       fetchGenreList: flow(function* fetchGenreList() {
         const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
 
