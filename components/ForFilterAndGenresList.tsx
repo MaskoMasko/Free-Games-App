@@ -1,46 +1,26 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  Button,
-} from "react-native";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { store } from "../store/MoviesStore";
+import { styles } from "../styles/styles";
 
 export const FilterAndGenreList = observer(
   ({ navigation, isError, isLoading, isIdle, moviesData }: any) => {
     return (
       <View>
         {isError ? (
-          <View
-            style={{
-              padding: 32,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ fontSize: 30, margin: 50, fontWeight: "bold" }}>
-              Something went wrong :(
-            </Text>
+          <View style={styles.errorAndLoadingViews}>
+            <Text style={styles.errorAndLoading}>Something went wrong :(</Text>
           </View>
         ) : isLoading ? (
-          <View
-            style={{
-              padding: 32,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Text style={{ fontSize: 30, margin: 50, fontWeight: "bold" }}>
-              Loading...
-            </Text>
+          <View style={styles.errorAndLoadingViews}>
+            <Text style={styles.errorAndLoading}>Loading...</Text>
           </View>
         ) : isIdle ? null : (
-          <ScrollView>
-            {moviesData.map((movie: any) => {
+          <FlatList
+            data={moviesData}
+            keyExtractor={(movie) => movie.key}
+            renderItem={({ item: movie, index }) => {
               return (
                 <TouchableOpacity
                   key={movie.key}
@@ -49,16 +29,17 @@ export const FilterAndGenreList = observer(
                     store.setSelectedMovie(movie);
                     navigation.navigate("Details");
                   }}
+                  style={styles.filteredItemsContainer}
                 >
                   <Image
                     source={{ uri: movie.poster }}
-                    style={{ width: 300, height: 450 }}
+                    style={styles.filteredItemsImage}
                   ></Image>
-                  <Text>{movie.title}</Text>
+                  <Text style={styles.filteredItemsText}>{movie.title}</Text>
                 </TouchableOpacity>
               );
-            })}
-          </ScrollView>
+            }}
+          ></FlatList>
         )}
       </View>
     );

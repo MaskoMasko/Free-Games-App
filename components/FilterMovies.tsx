@@ -22,13 +22,22 @@ export const FilterMovies = observer(
       }
     );
     return (
-      <View style={{ marginBottom: 300 }}>
+      <View style={{ marginBottom: 400, width: "100%" }}>
         <TextInput
           value={value}
           onChangeText={(e) => setValue(e)}
           placeholder="go yes"
-          style={{ marginTop: 100 }}
+          style={{
+            marginTop: 140,
+            borderRadius: 5,
+            borderColor: "grey",
+            borderWidth: 2,
+            padding: 10,
+            marginHorizontal: 20,
+            marginBottom: -20,
+          }}
         ></TextInput>
+        <Text></Text>
         <FilterAndGenreList
           navigation={navigation}
           isError={isError}

@@ -6,6 +6,7 @@ import { Animated, Text, TouchableOpacity, View } from "react-native";
 import { useQuery } from "react-query";
 import { MovieModel, store } from "../store/MoviesStore";
 import { MoviesForList } from "./MoviesForList";
+import { styles } from "../styles/styles";
 // import _ from "lodash";
 
 const ITEM_WIDTH = 320;
@@ -29,9 +30,9 @@ export const MovieList = observer(function MovieList({
   if (isError) {
     return (
       <View
-        style={{ padding: 32, alignItems: "center", justifyContent: "center" }}
+        style={styles.errorAndLoadingViews}
       >
-        <Text style={{ fontSize: 30, margin: 50, fontWeight: "bold" }}>
+        <Text style={styles.errorAndLoading}>
           Something went wrong :(
         </Text>
       </View>
@@ -40,9 +41,9 @@ export const MovieList = observer(function MovieList({
   if (isLoading) {
     return (
       <View
-        style={{ padding: 32, alignItems: "center", justifyContent: "center" }}
+        style={styles.errorAndLoadingViews}
       >
-        <Text style={{ fontSize: 30, margin: 50, fontWeight: "bold" }}>
+        <Text style={styles.errorAndLoading}>
           Loading...
         </Text>
       </View>
