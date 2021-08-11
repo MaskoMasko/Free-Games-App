@@ -2,7 +2,7 @@ import { NavigationProp } from "@react-navigation/native";
 import { observer } from "mobx-react-lite";
 import { Instance } from "mobx-state-tree";
 import React from "react";
-import { Image, Text, View, Animated } from "react-native";
+import { Image, Text, View, Animated, TouchableHighlight } from "react-native";
 import { MovieModel, store } from "../store/MoviesStore";
 import { MovieRating } from "./MovieRating";
 import { styles } from "../styles/styles";
@@ -37,7 +37,7 @@ export const MoviesForList = observer(function MoviesForList({
                 key={index}
                 style={styles.movieGenres}
                 onPress={() => {
-                  store.setOneFatNothing(genre);
+                  store.setGenre(genre);
                   navigation.navigate("Genres");
                 }}
               >

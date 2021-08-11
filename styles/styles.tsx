@@ -94,4 +94,13 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  pageNumber: {
+    padding: 10,
+    height: 45,
+    marginTop: 10,
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "black",
+    borderRadius: 10,
+  },
 });

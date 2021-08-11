@@ -21,7 +21,7 @@ export const MovieDetails = observer(
                 style={styles.movieGenres}
                 key={index}
                 onPress={() => {
-                  store.setOneFatNothing(genre);
+                  store.setGenre(genre);
                   navigation.navigate("Genres");
                 }}
               >

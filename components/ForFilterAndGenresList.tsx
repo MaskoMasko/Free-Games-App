@@ -1,6 +1,13 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  Button,
+} from "react-native";
 import { store } from "../store/MoviesStore";
 
 export const FilterAndGenreList = observer(

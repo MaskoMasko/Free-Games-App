@@ -1,11 +1,13 @@
 import { NavigationProp } from "@react-navigation/core";
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { TextInput, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import { useQuery } from "react-query";
 import { useDebounced } from "../hooks/useDebounced";
 import { store } from "../store/MoviesStore";
 import { FilterAndGenreList } from "./ForFilterAndGenresList";
+import { styles } from "../styles/styles";
+import { CustomButton } from "./CustomButton";
 
 export const FilterMovies = observer(
   ({ navigation }: { navigation: NavigationProp<any> }) => {
@@ -13,14 +15,14 @@ export const FilterMovies = observer(
     const search = useDebounced(value, 1000);
 
     const { isLoading, isError, isIdle, data } = useQuery(
-      ["FilteredMovies", search],
+      ["FilteredMovies", search, store.pageNumber],
       () => {
         if (search === "") return;
         return store.fetchFilteredMovies(search);
       }
     );
     return (
-      <View>
+      <View style={{ marginBottom: 300 }}>
         <TextInput
           value={value}
           onChangeText={(e) => setValue(e)}
@@ -34,6 +36,21 @@ export const FilterMovies = observer(
           isIdle={isIdle}
           moviesData={store.filteredMovies}
         ></FilterAndGenreList>
+        <View style={{ flexDirection: "row", alignSelf: "center" }}>
+          <CustomButton
+            title="Prev Page"
+            color="white"
+            backgroundColor="orange"
+            onPress={() => store.decreasePageNumber()}
+          ></CustomButton>
+          <Text style={styles.pageNumber}>{store.pageNumber}</Text>
+          <CustomButton
+            title="Next Page"
+            color="white"
+            backgroundColor="orange"
+            onPress={() => store.increasePageNumber()}
+          ></CustomButton>
+        </View>
       </View>
     );
   }
