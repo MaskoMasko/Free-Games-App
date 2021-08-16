@@ -18,3 +18,22 @@ getSnapshot - getSnapshot(model, applyPostProcess): returns a snapshot represent
 (i to dosta njih)
 -nez ca je tryRefrence
 -nike jednostavne stvari - provjerava dali je user loginan, dobije niki item z liste, zbrajanje zbroja, array od mapa, mapiranje, filteranje, counter, booleans, returna url
+
+HOME PAGE
+TOP HAS SEARCH INPUT - when input pressed modal slida unutra sa inputon i top searchovi
+then we have filtering by tvshows, movies i categories
+onako top movie u pozadini
+watch it again (aka meni favs)
+top 10 idk samoo da go yes
+TAB za 3 screena 1 HOME 1COMING SOON 1 DOWNLOADS
+COMMING SOON SCREEm
+
+i can sort by newest and i can try to push notifications
+yee thats all i got for this one
+
+DOWNLOADS
+dowload postere thats the best i can do sooo...
+
+#SVAKI SCREEN IMA U HEADERU SEAARCH BAR
+#MOZDA NEKMI SISTEM KOJI ZAPAMTI USERE
+i tjt ja mislin
