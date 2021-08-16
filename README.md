@@ -19,7 +19,6 @@ getSnapshot - getSnapshot(model, applyPostProcess): returns a snapshot represent
 -nez ca je tryRefrence
 -nike jednostavne stvari - provjerava dali je user loginan, dobije niki item z liste, zbrajanje zbroja, array od mapa, mapiranje, filteranje, counter, booleans, returna url
 
-<<<<<<< HEAD
 HOME PAGE
 TOP HAS SEARCH INPUT - when input pressed modal slida unutra sa inputon i top searchovi
 then we have filtering by tvshows, movies i categories
@@ -38,7 +37,8 @@ dowload postere thats the best i can do sooo...
 #SVAKI SCREEN IMA U HEADERU SEAARCH BAR
 #MOZDA NEKMI SISTEM KOJI ZAPAMTI USERE
 i tjt ja mislin
-=======
+
+<<<<<<< HEAD =======
 generics typescript:
 function funcName<T>(prop:T):T[]{
 
