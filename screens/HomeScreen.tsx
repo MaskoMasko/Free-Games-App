@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, ScrollView } from "react-native";
 import { useQuery } from "react-query";
 import { MovieList } from "../components/MovieList";
 import { store } from "../store/MoviesStore";
@@ -7,6 +7,7 @@ import { styles } from "../styles/styles";
 import { NavigationProp } from "@react-navigation/core";
 import Text from "../styles/Text";
 import theme from "../styles/theme";
+import { BestRatedMovie } from "../components/BestRatedmovie";
 
 const { spacing, colors } = theme;
 
@@ -28,11 +29,14 @@ export function HomeScreen({
   }
 
   return (
-    <View style={styles.container}>
-      <Text variant="boldText" mt="100" mb="-50" fontSize={spacing.xl}>
-        Top Movies
-      </Text>
-      <MovieList navigation={navigation}></MovieList>
-    </View>
+    <ScrollView>
+      <View style={styles.container}>
+        <BestRatedMovie></BestRatedMovie>
+        <Text variant="boldText" mt="100" mb="-50" fontSize={spacing.xl}>
+          Top Movies
+        </Text>
+        <MovieList navigation={navigation}></MovieList>
+      </View>
+    </ScrollView>
   );
 }

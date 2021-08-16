@@ -24,6 +24,10 @@ export const MovieList = observer(function MovieList({
 
   const { isLoading, isError, isIdle, data } = useQuery("Movies", async () => {
     const sacekaj = await store.fetchData();
+    const bestRating = sacekaj
+      .map((e: Instance<typeof MovieModel>) => e.rating)
+      .sort((a: number, b: number) => b - a)[0];
+    store.getBestRatedMovie(bestRating);
     setMovies([{ key: "left-spacer" }, ...sacekaj, { key: "right-spacer" }]);
     return sacekaj;
   });
