@@ -8,6 +8,7 @@ import { NavigationProp } from "@react-navigation/core";
 import Text from "../styles/Text";
 import theme from "../styles/theme";
 import { BestRatedMovie } from "../components/BestRatedmovie";
+import { WatchItAgain } from "../components/WatchItAgain";
 
 const { spacing, colors } = theme;
 
@@ -30,12 +31,13 @@ export function HomeScreen({
 
   return (
     <ScrollView>
-      <View style={styles.container}>
+      <View style={[styles.container, { transform: [{ translateY: 1000 }] }]}>
         <BestRatedMovie></BestRatedMovie>
         <Text variant="boldText" mt="100" mb="-50" fontSize={spacing.xl}>
           Top Movies
         </Text>
         <MovieList navigation={navigation}></MovieList>
+        <WatchItAgain></WatchItAgain>
       </View>
     </ScrollView>
   );

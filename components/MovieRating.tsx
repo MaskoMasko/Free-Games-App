@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-export const MovieRating = ({ movie }: { movie: { rating: number } }) => {
+
+export const MovieRating = ({ movie }: any) => {
   return (
     <View style={{ alignSelf: "center", flexDirection: "row" }}>
       <Text

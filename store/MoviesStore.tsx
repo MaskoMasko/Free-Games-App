@@ -49,6 +49,7 @@ const MovieStore = model("MovieStore", {
   filteredMoviesByGenre: array(
     safeReference(MovieModel, { acceptsUndefined: false })
   ),
+  watchedMovies: array(safeReference(MovieModel, { acceptsUndefined: false })),
   bestRatedMovie: safeReference(MovieModel),
 
   genreId: 0,
@@ -87,6 +88,7 @@ const MovieStore = model("MovieStore", {
     return {
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;
+        self.watchedMovies.push(self.selectedMovie!);
       },
       setGenre(genre: { id: number; name: string }) {
         self.genreId = genre.id;
@@ -104,7 +106,6 @@ const MovieStore = model("MovieStore", {
             self.bestRatedMovie = movie.key;
           }
         }
-        console.log(self.bestRatedMovie);
       },
       increasePageNumber() {
         if (self.filteredMovies.length == 0) return;

@@ -23,7 +23,7 @@ export const FilterMovies = observer(
       { keepPreviousData: true }
     );
     return (
-      <View style={{ marginBottom: 400, width: "100%" }}>
+      <View style={{ width: "100%" }}>
         <TextInput
           onSubmitEditing={(e) => {
             store.resetPageNumber();
