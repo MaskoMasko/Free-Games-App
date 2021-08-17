@@ -164,5 +164,4 @@ const MovieStore = model("MovieStore", {
       }),
     };
   });
-
 export const store = MovieStore.create({});

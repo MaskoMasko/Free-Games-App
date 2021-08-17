@@ -10,6 +10,7 @@ import { FilterMoviesScreen } from "./screens/FilterMoviesScreen";
 import { FilteredByGenreScreen } from "./screens/FilteredByGenreScreen";
 import { ThemeProvider } from "@shopify/restyle";
 import theme from "./styles/theme";
+import { DownloadPosterScreen } from "./screens/DownloadPosterScreen";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,11 @@ export default function App() {
                       options={{ title: "Filter Movies" }}
                       name="Filter"
                       component={FilterMoviesScreen}
+                    ></Drawer.Screen>
+                    <Drawer.Screen
+                      options={{ title: "Download Movie Posters" }}
+                      name="Download"
+                      component={DownloadPosterScreen}
                     ></Drawer.Screen>
                   </Drawer.Navigator>
                 );

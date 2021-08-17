@@ -22,11 +22,10 @@ getSnapshot - getSnapshot(model, applyPostProcess): returns a snapshot represent
 ---
 
 HOME PAGE
-TOP HAS SEARCH INPUT - when input pressed modal slida unutra sa inputon i top searchovi
 then we have filtering by tvshows, movies i categories
 onako top movie u pozadini- nebas ali done
-watch it again (aka meni favs)
-top 10 idk samoo da go yes
+watch it again (aka meni favs) -- BUT FKCUBUNNNFGGg UI NE DELKA OMFGA SGJ KS GS DGK DGK KSD SKD GKS DKSDF REORTED
+top 10 idk samoo da go yes 
 TAB za 3 screena 1 HOME 1COMING SOON 1 DOWNLOADS
 COMMING SOON SCREEm
 

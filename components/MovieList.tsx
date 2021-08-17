@@ -56,9 +56,8 @@ export const MovieList = observer(function MovieList({
   if (isIdle) {
     return null;
   }
-
   return (
-    <View >
+    <View>
       <Animated.FlatList
         data={movies}
         keyExtractor={(movie) => movie.key}
