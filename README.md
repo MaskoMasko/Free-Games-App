@@ -25,7 +25,7 @@ HOME PAGE
 then we have filtering by tvshows, movies i categories
 onako top movie u pozadini- nebas ali done
 watch it again (aka meni favs) -- BUT FKCUBUNNNFGGg UI NE DELKA OMFGA SGJ KS GS DGK DGK KSD SKD GKS DKSDF REORTED
-top 10 idk samoo da go yes 
+top 10 idk samoo da go yes
 TAB za 3 screena 1 HOME 1COMING SOON 1 DOWNLOADS
 
 COMMING SOON SCREEm
@@ -33,11 +33,11 @@ COMMING SOON SCREEm
 i can sort by newest and i can try to push notifications
 yee thats all i got for this one
 
-DOWNLOADS 
+DOWNLOADS
 dowload postere thats the best i can do sooo... nenenenen
 
-#SVAKI SCREEN IMA U HEADERU SEAARCH BAR  neneneennene
-#MOZDA NEKMI SISTEM KOJI ZAPAMTI USERE 
+#SVAKI SCREEN IMA U HEADERU SEAARCH BAR neneneennene
+#MOZDA NEKMI SISTEM KOJI ZAPAMTI USERE
 i tjt ja mislin
 
 ---
@@ -78,3 +78,11 @@ Record constructs an object type whose property keys are Keys and whose property
 posoje jos i Pick i Omit ali me ne zanimaju tako da :)
 
 > > > > > > > 6a06f38e00953b8829aa2bc30758e89086503e0c
+
+OVAJ API
+-ima rating kao 12, peg 18 i tako ni bas nisto ali ako be bude ideja se more dodati na details page
+-ima networks ni bas nisto
+-ima trending ali da...
+-UUUUUUU VERY NICE ACTORE MOREN i aint gonna lose that bad boy
+https://api.themoviedb.org/3/person/popular?api_key=b27cfa6975b477d35aff752392afd2bc&language=en-US&page=1
+-provided regions i dont rly know AHHHHHHHHHH
