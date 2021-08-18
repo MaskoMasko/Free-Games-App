@@ -31,14 +31,12 @@ export function HomeScreen({
 
   return (
     <ScrollView>
-      <View style={[styles.container, { transform: [{ translateY: 1000 }] }]}>
-        <BestRatedMovie></BestRatedMovie>
-        <Text variant="boldText" mt="100" mb="-50" fontSize={spacing.xl}>
-          Top Movies
-        </Text>
-        <MovieList navigation={navigation}></MovieList>
-        <WatchItAgain></WatchItAgain>
-      </View>
+      <BestRatedMovie></BestRatedMovie>
+      <Text variant="boldText" mt="100" mb="-50" fontSize={spacing.xl}>
+        Top Movies
+      </Text>
+      <MovieList navigation={navigation}></MovieList>
+      <WatchItAgain></WatchItAgain>
     </ScrollView>
   );
 }

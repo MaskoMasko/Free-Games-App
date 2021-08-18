@@ -1,4 +1,4 @@
-import { flow, getRoot, types } from "mobx-state-tree";
+import { Instance, flow, getRoot, types } from "mobx-state-tree";
 import { getFilteredMovies, getMovies, getMoviesByGenre } from "../api/api";
 import { API_KEY } from "../config";
 
@@ -14,7 +14,7 @@ const {
   maybe,
 } = types;
 
-const GenreModel = model({
+export const GenreModel = model({
   id: identifierNumber,
   name: string,
 });
@@ -62,6 +62,9 @@ const MovieStore = model("MovieStore", {
       get movieList() {
         const splicedMovies = [...self.allMovies.values()];
         return splicedMovies.splice(0, 20);
+      },
+      get genreList(): Instance<typeof GenreModel>[] {
+        return [...store.allGenres.values()];
       },
     };
   })
@@ -133,7 +136,6 @@ const MovieStore = model("MovieStore", {
         const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
 
         const data = yield fetch(url).then((r) => r.json());
-
         return self.processGenre(data.genres);
       }),
       fetchData: flow(function* fetchData() {

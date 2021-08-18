@@ -7,8 +7,8 @@ import { styles } from "../styles/styles";
 export const WatchItAgain = observer(({ navigation }: any) => {
   //to rabi staviti u onaj flatlist
   return (
-    <View style={{ marginBottom: 100 }}>
-      <Text style={[styles.mainHeader, { marginLeft: 20 }]}>
+    <View>
+      <Text style={[styles.mainHeader, { marginLeft: 20, marginTop: 50 }]}>
         Watch It Again
       </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>

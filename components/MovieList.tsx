@@ -86,7 +86,6 @@ export const MovieList = observer(function MovieList({
           return (
             <TouchableOpacity
               activeOpacity={0.5}
-              style={{ marginTop: 130 }}
               onPress={() => {
                 store.setSelectedMovie(movie.key);
                 navigation.navigate("Details");

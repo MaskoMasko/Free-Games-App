@@ -7,7 +7,7 @@ import { MovieRating } from "./MovieRating";
 
 export const BestRatedMovie = observer(() => {
   return (
-    <View style={[styles.container, { marginTop: 500 }]}>
+    <View style={[styles.container]}>
       <Text style={[styles.mainHeader, { textAlign: "center" }]}>
         Best Rated Movie
       </Text>
