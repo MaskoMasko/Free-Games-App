@@ -27,16 +27,17 @@ onako top movie u pozadini- nebas ali done
 watch it again (aka meni favs) -- BUT FKCUBUNNNFGGg UI NE DELKA OMFGA SGJ KS GS DGK DGK KSD SKD GKS DKSDF REORTED
 top 10 idk samoo da go yes 
 TAB za 3 screena 1 HOME 1COMING SOON 1 DOWNLOADS
+
 COMMING SOON SCREEm
 
 i can sort by newest and i can try to push notifications
 yee thats all i got for this one
 
-DOWNLOADS
-dowload postere thats the best i can do sooo...
+DOWNLOADS 
+dowload postere thats the best i can do sooo... nenenenen
 
-#SVAKI SCREEN IMA U HEADERU SEAARCH BAR
-#MOZDA NEKMI SISTEM KOJI ZAPAMTI USERE
+#SVAKI SCREEN IMA U HEADERU SEAARCH BAR  neneneennene
+#MOZDA NEKMI SISTEM KOJI ZAPAMTI USERE 
 i tjt ja mislin
 
 ---

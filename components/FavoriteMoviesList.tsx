@@ -3,8 +3,13 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
+import { Snackbar } from "react-native-paper";
 
 export const FavoriteMoviesList = observer(() => {
+  const [visible, setVisible] = React.useState(false);
+  const dismiss = () => {
+    setVisible(false);
+  };
   return (
     <View style={{ height: "100%" }}>
       {store.favoriteMoviesList.length !== 0 ? (
@@ -20,6 +25,8 @@ export const FavoriteMoviesList = observer(() => {
               <TouchableOpacity
                 activeOpacity={0.5}
                 onPress={() => {
+                  setVisible(true);
+                  store.setSelectedMovie(movie.key);
                   store.removeFavoriteMovie(index);
                 }}
                 style={styles.removeButton}
@@ -34,6 +41,18 @@ export const FavoriteMoviesList = observer(() => {
           You haven't added any movie to the list...
         </Text>
       )}
+      <Snackbar
+        visible={visible}
+        onDismiss={() => dismiss()}
+        action={{
+          label: "Undo",
+          onPress: () => {
+            store.selectedMovie?.addToFavorites();
+          },
+        }}
+      >
+        Removed {store.selectedMovie?.title} from favorites...
+      </Snackbar>
     </View>
   );
 });

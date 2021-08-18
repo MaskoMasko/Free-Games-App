@@ -12,6 +12,7 @@ import { ThemeProvider } from "@shopify/restyle";
 import theme from "./styles/theme";
 import { DownloadPosterScreen } from "./screens/DownloadPosterScreen";
 import { CategoriesScreen } from "./screens/CategoriesScreen";
+import { CommingSoonScreen } from "./screens/CommingSoonScreen";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,11 @@ export default function App() {
                       name="Categories"
                       component={CategoriesScreen}
                     />
+                    <Drawer.Screen
+                      name="CommingSoon"
+                      options={{ title: "Comming Soon" }}
+                      component={CommingSoonScreen}
+                    ></Drawer.Screen>
                     <Drawer.Screen
                       options={{ title: "Download Movie Posters" }}
                       name="Download"
