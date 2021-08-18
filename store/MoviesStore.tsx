@@ -56,6 +56,8 @@ const MovieStore = model("MovieStore", {
   genreName: "",
   pageNumber: 1,
   genrePageNumber: 1,
+
+  ima: false,
 })
   .views((self) => {
     return {
@@ -91,6 +93,10 @@ const MovieStore = model("MovieStore", {
     return {
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;
+        if (self.watchedMovies.includes(self.selectedMovie)) {
+          let index = self.watchedMovies.lastIndexOf(self.selectedMovie);
+          self.watchedMovies.splice(index, 1);
+        }
         self.watchedMovies.push(self.selectedMovie!);
       },
       setGenre(genre: { id: number; name: string }) {
@@ -99,6 +105,13 @@ const MovieStore = model("MovieStore", {
       },
       addFavoriteMovie(movieKey: any) {
         self.favoriteMoviesList.push(movieKey);
+        const uniques = [...new Set([...self.favoriteMoviesList])];
+        if (self.favoriteMoviesList.length == uniques.length) {
+          self.ima = false;
+        } else {
+          self.ima = true;
+          self.favoriteMoviesList = uniques;
+        }
       },
       removeFavoriteMovie(id: number) {
         self.favoriteMoviesList.splice(id, 1);

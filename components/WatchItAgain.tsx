@@ -13,17 +13,22 @@ export const WatchItAgain = observer(({ navigation }: any) => {
       </Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {store.watchedMovies.length != 0 ? (
-          store.watchedMovies.map((movie, i) => {
-            return (
-              <View key={i}>
-                <Image
-                  source={{ uri: movie.poster }}
-                  style={styles.moviePoster}
-                ></Image>
-                <Text style={styles.movieShortDescription}>{movie.title}</Text>
-              </View>
-            );
-          })
+          store.watchedMovies
+            .slice()
+            .reverse()
+            .map((movie, i) => {
+              return (
+                <View key={i}>
+                  <Image
+                    source={{ uri: movie.poster }}
+                    style={styles.moviePoster}
+                  ></Image>
+                  <Text style={styles.movieShortDescription}>
+                    {movie.title}
+                  </Text>
+                </View>
+              );
+            })
         ) : (
           <Text>U haven't watch any movie...</Text>
         )}

@@ -83,8 +83,17 @@ export const MovieDetails = observer(
           </View>
         </ScrollView>
         <View>
-          <Snackbar visible={showSnack} onDismiss={() => dismiss()}>
-            Added {store.selectedMovie?.title} to favorites...
+          <Snackbar
+            visible={showSnack}
+            onDismiss={() => {
+              dismiss();
+            }}
+          >
+            {store.ima ? (
+              <Text>Already added that one...</Text>
+            ) : (
+              <Text>Added to favorites...</Text>
+            )}
           </Snackbar>
         </View>
       </View>
