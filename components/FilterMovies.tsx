@@ -45,7 +45,7 @@ export const FilterMovies = observer(
             style={[
               !pressed
                 ? { marginBottom: 200 }
-                : { marginBottom: 200, transform: [{ translateY: 100 }] },
+                : { marginBottom: 200, transform: [{ translateY: 70 }] },
             ]}
           >
             <TextInput

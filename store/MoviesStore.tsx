@@ -177,6 +177,17 @@ const MovieStore = model("MovieStore", {
         );
         return normalized;
       }),
+      fetchUpcomingMovies: flow(function* fetchUpcomingMovies() {
+        let allMovies;
+        let nisto = [];
+        for (let i = 1; i < 20; i++) {
+          allMovies = yield fetch(
+            `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${i}`
+          ).then((x) => x.json());
+          nisto.push(allMovies.results);
+        }
+        return nisto;
+      }),
     };
   });
 export const store = MovieStore.create({});
