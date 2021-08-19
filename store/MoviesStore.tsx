@@ -64,6 +64,7 @@ export const ActorsModel = model({
 const MovieStore = model("MovieStore", {
   allGenres: map(GenreModel),
   allMovies: map(MovieModel),
+  allActors: map(ActorsModel),
 
   selectedMovie: safeReference(MovieModel),
   favoriteMoviesList: array(
@@ -73,7 +74,7 @@ const MovieStore = model("MovieStore", {
   filteredMoviesByGenre: array(
     safeReference(MovieModel, { acceptsUndefined: false })
   ),
-  allActors: array(ActorsModel),
+  actors: array(safeReference(ActorsModel)),
   selectedActor: safeReference(ActorsModel),
 
   watchedMovies: array(safeReference(MovieModel, { acceptsUndefined: false })),
@@ -113,6 +114,15 @@ const MovieStore = model("MovieStore", {
       const dataList = Array.from(data);
       const mapped = dataList.map((e: any) => {
         return self.allGenres.put(e);
+      });
+      return Array.isArray(data) ? mapped : mapped[0];
+    },
+  }))
+  .actions((self) => ({
+    processActor(data: any): any {
+      const dataList = Array.from(data);
+      const mapped = dataList.map((e: any) => {
+        return self.allActors.put(e);
       });
       return Array.isArray(data) ? mapped : mapped[0];
     },
@@ -230,9 +240,8 @@ const MovieStore = model("MovieStore", {
       fetchActors: flow(function* fetchActors() {
         const url = `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&language=en-US&page=${self.actorsPageNumber}`;
         const moviesListData = yield fetch(url).then((x) => x.json());
-        for (let i = 0; i < moviesListData.results.length; i++) {
-          self.allActors.push(moviesListData.results[i]);
-        }
+        const normalized = self.processActor(moviesListData.results);
+        self.actors = normalized.map((actor: { name: string }) => actor.name);
         return moviesListData.results;
       }),
     };
