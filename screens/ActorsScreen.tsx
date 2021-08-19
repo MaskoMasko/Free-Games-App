@@ -10,7 +10,7 @@ export const ActorsScreen = observer(({ navigation }: any) => {
   const { isLoading, isError, isIdle, data } = useQuery(
     ["Actors", store.actorsPageNumber],
     () => {
-      return store.fetchActors();
+      return store.fetchAllData("fetchActors", "");
     }
   );
   if (isLoading) {
@@ -55,7 +55,7 @@ export const ActorsScreen = observer(({ navigation }: any) => {
           backgroundColor="orange"
           onPress={() => {
             // toTop();
-            store.decreaseActorsPageNumber();
+            store.setPagination("actors", "decrease");
           }}
         ></CustomButton>
         <Text style={styles.pageNumber}>{store.actorsPageNumber}</Text>
@@ -65,7 +65,7 @@ export const ActorsScreen = observer(({ navigation }: any) => {
           backgroundColor="orange"
           onPress={() => {
             // toTop();
-            store.increaseActorsPageNumber();
+            store.setPagination("actors", "increase");
           }}
         ></CustomButton>
       </View>

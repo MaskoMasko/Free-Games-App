@@ -18,7 +18,7 @@ export function HomeScreen({
   navigation: NavigationProp<any>;
 }) {
   const query = useQuery("genreList", () => {
-    return store.fetchGenreList();
+    return store.fetchAllData("fetchGenreList", "");
   });
 
   if (!query.isSuccess) {

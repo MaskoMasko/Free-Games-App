@@ -16,7 +16,7 @@ export const ComingSoonScreen = () => {
   const { isLoading, isError, isIdle, data } = useQuery(
     ["FilteredMovies"],
     () => {
-      return store.fetchUpcomingMovies();
+      return store.fetchAllData("fetchUpcomingMovies", "");
     },
     { keepPreviousData: true }
   );

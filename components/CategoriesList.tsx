@@ -17,7 +17,7 @@ export const CategoriesList = ({
             style={styles.movieGenres}
             key={index}
             onPress={() => {
-              store.resetGenrePageNumber();
+              store.setPagination("category", "reset");
               store.setGenre(genre);
               navigation.navigate("Genres");
             }}

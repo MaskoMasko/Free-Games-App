@@ -23,7 +23,7 @@ export const MovieList = observer(function MovieList({
   const scrollX = React.useRef(new Animated.Value(0)).current;
 
   const { isLoading, isError, isIdle, data } = useQuery("Movies", async () => {
-    const sacekaj = await store.fetchData();
+    const sacekaj = await store.fetchAllData("fetchData", "");
     const bestRating = sacekaj
       .map((e: Instance<typeof MovieModel>) => e.rating)
       .sort((a: number, b: number) => b - a)[0];

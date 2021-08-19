@@ -29,7 +29,7 @@ export const FilterMovies = observer(
       ["FilteredMovies", search, store.pageNumber],
       () => {
         if (search === "") return;
-        return store.fetchFilteredMovies(search);
+        return store.fetchAllData("fetchFilteredMovies", search);
       },
       { keepPreviousData: true }
     );
@@ -51,7 +51,7 @@ export const FilterMovies = observer(
             <TextInput
               onFocus={() => setPressed(true)}
               onChangeText={(e) => {
-                store.resetPageNumber();
+                store.setPagination("filter", "reset");
                 setValue(e);
               }}
               onSubmitEditing={() => setPressed(false)}
@@ -87,14 +87,14 @@ export const FilterMovies = observer(
             title="Prev Page"
             color="white"
             backgroundColor="orange"
-            onPress={() => store.decreasePageNumber()}
+            onPress={() => store.setPagination("filter", "decrease")}
           ></CustomButton>
           <Text style={styles.pageNumber}>{store.pageNumber}</Text>
           <CustomButton
             title="Next Page"
             color="white"
             backgroundColor="orange"
-            onPress={() => store.increasePageNumber()}
+            onPress={() => store.setPagination("filter", "increase")}
           ></CustomButton>
         </View>
       </View>

@@ -35,13 +35,8 @@ export default function App() {
                     <Drawer.Screen
                       name="Home"
                       component={HomeScreen}
-                      options={{ title: "Movies Store" }}
+                      options={{ title: "Home", headerTitle: "Movie Store" }}
                     />
-                    <Drawer.Screen
-                      name="Favorites"
-                      options={{ title: "Favorite Movies" }}
-                      component={FavoritesScreen}
-                    ></Drawer.Screen>
                     <Drawer.Screen
                       options={{ title: "Filter Movies" }}
                       name="Filter"
@@ -64,6 +59,11 @@ export default function App() {
                       options={{ title: "Download Movie Posters" }}
                       name="Download"
                       component={DownloadPosterScreen}
+                    ></Drawer.Screen>
+                    <Drawer.Screen
+                      name="Favorites"
+                      options={{ title: "Favorite Movies" }}
+                      component={FavoritesScreen}
                     ></Drawer.Screen>
                   </Drawer.Navigator>
                 );

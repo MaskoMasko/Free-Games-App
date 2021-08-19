@@ -131,8 +131,8 @@ const MovieStore = model("MovieStore", {
     return {
       setSelectedMovie(movieKey: any) {
         self.selectedMovie = movieKey;
-        if (self.watchedMovies.includes(self.selectedMovie)) {
-          let index = self.watchedMovies.lastIndexOf(self.selectedMovie);
+        if (self.watchedMovies.includes(self.selectedMovie!)) {
+          let index = self.watchedMovies.lastIndexOf(self.selectedMovie!);
           self.watchedMovies.splice(index, 1);
         }
         self.watchedMovies.push(self.selectedMovie!);
@@ -164,85 +164,82 @@ const MovieStore = model("MovieStore", {
           }
         }
       },
-      increasePageNumber() {
-        if (self.filteredMovies.length == 0) return;
-        self.pageNumber += 1;
+      setPagination(whatPage: any, action: string) {
+        if (action == "increase") {
+          if (whatPage == "category") {
+            if (self.filteredMoviesByGenre.length == 0) return;
+            self.genrePageNumber += 1;
+          } else if (whatPage == "filter") {
+            if (self.filteredMovies.length == 0) return;
+            self.pageNumber += 1;
+          } else if (whatPage == "actors") {
+            if (self.allActors.length == 0) return;
+            self.actorsPageNumber += 1;
+          }
+        } else if (action == "decrease") {
+          if (whatPage == "category") {
+            if (self.genrePageNumber == 1) return;
+            self.genrePageNumber -= 1;
+          } else if (whatPage == "filter") {
+            if (self.pageNumber == 1) return;
+            self.pageNumber -= 1;
+          } else if (whatPage == "actors") {
+            if (self.actorsPageNumber == 1) return;
+            self.actorsPageNumber -= 1;
+          }
+        } else if (action == "reset") {
+          if (whatPage == "filter") {
+            self.pageNumber = 1;
+          } else if (whatPage == "category") {
+            self.genrePageNumber = 1;
+          }
+        }
       },
-      increaseGenrePageNumber() {
-        if (self.filteredMoviesByGenre.length == 0) return;
-        self.genrePageNumber += 1;
-      },
-      increaseActorsPageNumber() {
-        if (self.allActors.length == 0) return;
-        self.actorsPageNumber += 1;
-      },
-      decreaseActorsPageNumber() {
-        if (self.actorsPageNumber == 1) return;
-        self.actorsPageNumber -= 1;
-      },
-      decreasePageNumber() {
-        if (self.pageNumber == 1) return;
-        self.pageNumber -= 1;
-      },
-      decreaseGenrePageNumber() {
-        if (self.genrePageNumber == 1) return;
-        self.genrePageNumber -= 1;
-      },
-      resetGenrePageNumber() {
-        self.genrePageNumber = 1;
-      },
-      resetPageNumber() {
-        self.pageNumber = 1;
-      },
-      fetchGenreList: flow(function* fetchGenreList() {
-        const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
+      fetchAllData: flow(function* fetchAllData(option: string, value: any) {
+        if (option == "fetchActors") {
+          const url = `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&language=en-US&page=${self.actorsPageNumber}`;
+          const moviesListData = yield fetch(url).then((x) => x.json());
+          const normalized = self.processActor(moviesListData.results);
+          self.actors = normalized.map((actor: { name: string }) => actor.name);
+          return moviesListData.results;
+        } else if (option == "fetchUpcomingMovies") {
+          let allMovies;
+          let nisto = [];
+          for (let i = 1; i < 20; i++) {
+            allMovies = yield fetch(
+              `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${i}`
+            ).then((x) => x.json());
+            nisto.push(allMovies.results);
+          }
+          return nisto;
+        } else if (option == "fetchMoviesByGenre") {
+          const genres = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${value}&page=${self.genrePageNumber}`;
+          const moviesListData = yield getMoviesByGenre(genres);
+          const normalized = self.process(moviesListData);
+          self.filteredMoviesByGenre = normalized.map(
+            (movie: { key: string }) => movie.key
+          );
+          return normalized;
+        } else if (option == "fetchFilteredMovies") {
+          const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${value}&page=${self.pageNumber}`;
 
-        const data = yield fetch(url).then((r) => r.json());
-        return self.processGenre(data.genres);
-      }),
-      fetchData: flow(function* fetchData() {
+          const moviesListData = yield getFilteredMovies(url);
+          const normalized = self.process(moviesListData);
+          self.filteredMovies = normalized.map(
+            (movie: { key: string }) => movie.key
+          );
+          return normalized;
+        } else if (option == "fetchGenreList") {
+          const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
+
+          const data = yield fetch(url).then((r) => r.json());
+          return self.processGenre(data.genres);
+        }
         const moviesListData = yield getMovies();
         for (let movie of moviesListData) {
           self.allMovies.put(movie);
         }
         return self.process(moviesListData);
-      }),
-      fetchFilteredMovies: flow(function* fetchFilteredMovies(inputValue) {
-        const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${inputValue}&page=${self.pageNumber}`;
-
-        const moviesListData = yield getFilteredMovies(url);
-        const normalized = self.process(moviesListData);
-        self.filteredMovies = normalized.map(
-          (movie: { key: string }) => movie.key
-        );
-        return normalized;
-      }),
-      fetchMoviesByGenre: flow(function* fetchMoviesByGenre(genreKey) {
-        const genres = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreKey}&page=${self.genrePageNumber}`;
-        const moviesListData = yield getMoviesByGenre(genres);
-        const normalized = self.process(moviesListData);
-        self.filteredMoviesByGenre = normalized.map(
-          (movie: { key: string }) => movie.key
-        );
-        return normalized;
-      }),
-      fetchUpcomingMovies: flow(function* fetchUpcomingMovies() {
-        let allMovies;
-        let nisto = [];
-        for (let i = 1; i < 20; i++) {
-          allMovies = yield fetch(
-            `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${i}`
-          ).then((x) => x.json());
-          nisto.push(allMovies.results);
-        }
-        return nisto;
-      }),
-      fetchActors: flow(function* fetchActors() {
-        const url = `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&language=en-US&page=${self.actorsPageNumber}`;
-        const moviesListData = yield fetch(url).then((x) => x.json());
-        const normalized = self.processActor(moviesListData.results);
-        self.actors = normalized.map((actor: { name: string }) => actor.name);
-        return moviesListData.results;
       }),
     };
   });

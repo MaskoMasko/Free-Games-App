@@ -36,7 +36,7 @@ export const MovieDetails = observer(
                   <Text
                     style={styles.movieGenres}
                     onPress={() => {
-                      store.resetGenrePageNumber();
+                      store.setPagination("category", "reset");
                       store.setGenre(genre);
                       navigation.navigate("Genres");
                     }}

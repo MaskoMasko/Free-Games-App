@@ -17,7 +17,7 @@ export const FilterGenre = observer(
     const { isLoading, isError, isIdle, data } = useQuery(
       ["FilteredMovies", store.genreId, store.genrePageNumber],
       () => {
-        return store.fetchMoviesByGenre(store.genreId);
+        return store.fetchAllData("fetchMoviesByGenre", store.genreId);
       },
       { keepPreviousData: true }
     );
@@ -39,7 +39,7 @@ export const FilterGenre = observer(
             backgroundColor="orange"
             onPress={() => {
               // toTop();
-              store.decreaseGenrePageNumber();
+              store.setPagination("category", "decrease");
             }}
           ></CustomButton>
           <Text style={styles.pageNumber}>{store.genrePageNumber}</Text>
@@ -49,7 +49,7 @@ export const FilterGenre = observer(
             backgroundColor="orange"
             onPress={() => {
               // toTop();
-              store.increaseGenrePageNumber();
+              store.setPagination("category", "increase");
             }}
           ></CustomButton>
         </View>
