@@ -56,7 +56,7 @@ export const ActorsModel = model({
   id: maybe(number),
   known_for: array(BeforeMovie),
   known_for_department: maybe(string),
-  name: maybe(string),
+  name: identifier,
   popularity: maybe(number),
   profile_path: types.maybeNull(string),
 });
@@ -74,6 +74,7 @@ const MovieStore = model("MovieStore", {
     safeReference(MovieModel, { acceptsUndefined: false })
   ),
   allActors: array(ActorsModel),
+  selectedActor: safeReference(ActorsModel),
 
   watchedMovies: array(safeReference(MovieModel, { acceptsUndefined: false })),
   bestRatedMovie: safeReference(MovieModel),
@@ -129,6 +130,9 @@ const MovieStore = model("MovieStore", {
       setGenre(genre: { id: number; name: string }) {
         self.genreId = genre.id;
         self.genreName = genre.name;
+      },
+      setActor(actorId: any) {
+        self.selectedActor = actorId;
       },
       addFavoriteMovie(movieKey: any) {
         self.favoriteMoviesList.push(movieKey);

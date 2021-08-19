@@ -26,6 +26,10 @@ export const ActorsScreen = observer(({ navigation }: any) => {
         renderItem={({ item: actor, index }) => {
           return (
             <TouchableOpacity
+              onPress={() => {
+                store.setActor(actor.name);
+                navigation.navigate("ActorDetails");
+              }}
               activeOpacity={0.5}
               style={{ backgroundColor: "red", margin: 10, padding: 20 }}
             >

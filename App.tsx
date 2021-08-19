@@ -14,6 +14,7 @@ import { DownloadPosterScreen } from "./screens/DownloadPosterScreen";
 import { CategoriesScreen } from "./screens/CategoriesScreen";
 import { ComingSoonScreen } from "./screens/ComingSoonScreen";
 import { ActorsScreen } from "./screens/ActorsScreen";
+import { ActorDetailsScreen } from "./screens/ActorDetailsScreen";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,11 @@ export default function App() {
               name="Genres"
               component={FilteredByGenreScreen}
               options={{ title: "Genre Movies" }}
+            ></Stack.Screen>
+            <Stack.Screen
+              name="ActorDetails"
+              component={ActorDetailsScreen}
+              options={{ title: "Actor Details" }}
             ></Stack.Screen>
           </Stack.Navigator>
         </NavigationContainer>
