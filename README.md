@@ -95,7 +95,7 @@ JOS ZA NAPRAVITI:
 ZA POMOCI:
 -download popraviti
 -ref na listami
--read underlines
+-red underlines -- sad hi je malo previse ://
 
 OVAKO JER DA
 -filter input

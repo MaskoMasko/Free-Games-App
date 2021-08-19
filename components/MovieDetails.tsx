@@ -7,7 +7,7 @@ import { NavigationProp } from "@react-navigation/core";
 import { styles } from "../styles/styles";
 import Text from "../styles/Text";
 import theme from "../styles/theme";
-import { Snackbar } from "react-native-paper";
+import { Snackbar } from "./Snackbar";
 
 const { spacing } = theme;
 
@@ -84,21 +84,10 @@ export const MovieDetails = observer(
         </ScrollView>
         <View>
           <Snackbar
-            duration={3000}
-            style={{ backgroundColor: "orange" }}
             visible={showSnack}
-            onDismiss={() => {
-              dismiss();
-            }}
-          >
-            {store.ima ? (
-              <Text style={styles.removeButtonText}>
-                Already added that one...
-              </Text>
-            ) : (
-              <Text style={styles.removeButtonText}>Added to favorites...</Text>
-            )}
-          </Snackbar>
+            dismiss={() => dismiss()}
+            text={"add"}
+          ></Snackbar>
         </View>
       </View>
     );
