@@ -18,7 +18,7 @@ export const Snackbar = (props: any) => {
         alignSelf: "center",
       }}
       action={{
-        label: [text == "removed" ? "Undo" : ""],
+        label: `${[text == "removed" ? "Undo" : ""]}`,
         onPress: () => {
           store.selectedMovie?.addToFavorites();
         },
