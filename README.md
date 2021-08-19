@@ -88,7 +88,7 @@ https://api.themoviedb.org/3/person/popular?api_key=b27cfa6975b477d35aff752392af
 -provided regions i dont rly know AHHHHHHHHHH
 
 JOS ZA NAPRAVITI:
--dodati screenove za glumce
+-dodati screenove za glumce - yes kinda lose nap ali dela
 -u kategorije dodati nike liste ili ca god
 -vjv ne dela zboj ssot ali samo provivan nisto tako da...
 
@@ -96,3 +96,14 @@ ZA POMOCI:
 -download popraviti
 -ref na listami
 -read underlines
+
+HOOKVI
+useState
+useEffect
+useContext
+useForm
+useMemo
+useRef
+useCallback
+useReducer
+customHooks

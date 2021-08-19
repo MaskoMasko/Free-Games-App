@@ -13,15 +13,28 @@ export const ActorDetailsScreen = () => {
         }}
         style={styles.imageStyle}
       ></Image>
-      <Text>Profession: {store.selectedActor?.known_for_department}</Text>
-      <Text>Popularity: {store.selectedActor?.popularity}</Text>
-      <Text>Movies: </Text>
+      <Text style={styles.detailsText}>
+        Profession: {store.selectedActor?.known_for_department}
+      </Text>
+      <Text style={styles.detailsText}>
+        Popularity: {store.selectedActor?.popularity}
+      </Text>
       <View style={{ flexDirection: "row" }}>
-        {store.selectedActor?.known_for.map((movie, id) => {
-          return <Text key={id}>{movie.original_title}</Text>;
-        })}
+        <Text style={styles.detailsText}>Movies:</Text>
+        <View>
+          {store.selectedActor?.known_for.map((movie, id) => {
+            if (!movie.original_title) return;
+            return (
+              <Text key={id} style={styles.detailsText}>
+                {movie.original_title}
+              </Text>
+            );
+          })}
+        </View>
       </View>
-      <Text>Ovo ne dela kako rabi ali idc..</Text>
+      <Text style={[styles.movieDescText, { marginTop: -5, marginLeft: 5 }]}>
+        Ovo ne dela kako rabi ali idc..
+      </Text>
       {/*zasto bi mi dali 2 razlicita obj i bili kao yes i zbog tega san posa no... */}
     </ScrollView>
   );
