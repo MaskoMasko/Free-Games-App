@@ -1,6 +1,7 @@
 import { Instance, flow, getRoot, types } from "mobx-state-tree";
 import { getFilteredMovies, getMovies, getMoviesByGenre } from "../api/api";
 import { API_KEY } from "../config";
+import { BeforeMovieInterface } from "../api/api";
 
 const {
   string,
@@ -12,11 +13,23 @@ const {
   identifier,
   map,
   maybe,
+  boolean,
 } = types;
 
 export const GenreModel = model({
   id: identifierNumber,
   name: string,
+});
+
+export const BeforeMovie = model({
+  id: number,
+  original_title: maybe(string),
+  poster_path: maybe(string),
+  backdrop_path: maybe(string),
+  vote_average: number,
+  overview: string,
+  release_date: maybe(string),
+  genre_ids: array(number),
 });
 
 export const MovieModel = model("Movie", {
@@ -37,6 +50,17 @@ export const MovieModel = model("Movie", {
   };
 });
 
+export const ActorsModel = model({
+  adult: maybe(boolean),
+  gender: maybe(number),
+  id: maybe(number),
+  known_for: array(BeforeMovie),
+  known_for_department: maybe(string),
+  name: maybe(string),
+  popularity: maybe(number),
+  profile_path: types.maybeNull(string),
+});
+
 const MovieStore = model("MovieStore", {
   allGenres: map(GenreModel),
   allMovies: map(MovieModel),
@@ -49,6 +73,8 @@ const MovieStore = model("MovieStore", {
   filteredMoviesByGenre: array(
     safeReference(MovieModel, { acceptsUndefined: false })
   ),
+  allActors: array(ActorsModel),
+
   watchedMovies: array(safeReference(MovieModel, { acceptsUndefined: false })),
   bestRatedMovie: safeReference(MovieModel),
 
@@ -56,6 +82,7 @@ const MovieStore = model("MovieStore", {
   genreName: "",
   pageNumber: 1,
   genrePageNumber: 1,
+  actorsPageNumber: 1,
 
   ima: false,
 })
@@ -131,6 +158,14 @@ const MovieStore = model("MovieStore", {
         if (self.filteredMoviesByGenre.length == 0) return;
         self.genrePageNumber += 1;
       },
+      increaseActorsPageNumber() {
+        if (self.allActors.length == 0) return;
+        self.actorsPageNumber += 1;
+      },
+      decreaseActorsPageNumber() {
+        if (self.actorsPageNumber == 1) return;
+        self.actorsPageNumber -= 1;
+      },
       decreasePageNumber() {
         if (self.pageNumber == 1) return;
         self.pageNumber -= 1;
@@ -187,6 +222,14 @@ const MovieStore = model("MovieStore", {
           nisto.push(allMovies.results);
         }
         return nisto;
+      }),
+      fetchActors: flow(function* fetchActors() {
+        const url = `https://api.themoviedb.org/3/person/popular?api_key=${API_KEY}&language=en-US&page=${self.actorsPageNumber}`;
+        const moviesListData = yield fetch(url).then((x) => x.json());
+        for (let i = 0; i < moviesListData.results.length; i++) {
+          self.allActors.push(moviesListData.results[i]);
+        }
+        return moviesListData.results;
       }),
     };
   });

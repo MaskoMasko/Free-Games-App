@@ -6,7 +6,7 @@ const getImagePath = (path: string) =>
 const getBackdropPath = (path: string) =>
   `https://image.tmdb.org/t/p/w370_and_h556_multi_faces${path}`;
 
-interface BeforeMovieInterface {
+export interface BeforeMovieInterface {
   id: number;
   original_title: string;
   poster_path: string;

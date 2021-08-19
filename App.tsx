@@ -13,6 +13,7 @@ import theme from "./styles/theme";
 import { DownloadPosterScreen } from "./screens/DownloadPosterScreen";
 import { CategoriesScreen } from "./screens/CategoriesScreen";
 import { ComingSoonScreen } from "./screens/ComingSoonScreen";
+import { ActorsScreen } from "./screens/ActorsScreen";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,10 @@ export default function App() {
                       name="Categories"
                       component={CategoriesScreen}
                     />
+                    <Drawer.Screen
+                      name="Actors"
+                      component={ActorsScreen}
+                    ></Drawer.Screen>
                     <Drawer.Screen
                       name="CommingSoon"
                       options={{ title: "Coming Soon" }}
