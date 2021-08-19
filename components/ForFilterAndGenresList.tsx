@@ -1,11 +1,12 @@
 import { observer } from "mobx-react-lite";
-import React from "react";
+import React, { forwardRef } from "react";
 import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
 
 export const FilterAndGenreList = observer(
-  ({ navigation, isError, isLoading, isIdle, moviesData }: any) => {
+  ({ navigation, isError, isLoading, isIdle, moviesData, ref }: any) => {
+    //ne dela ref :/
     return (
       <View>
         {isError ? (
@@ -29,6 +30,7 @@ export const FilterAndGenreList = observer(
           </Text>
         ) : (
           <FlatList
+            // ref={ref}
             data={moviesData}
             keyExtractor={(movie) => movie.key}
             renderItem={({ item: movie, index }) => {

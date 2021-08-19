@@ -1,7 +1,13 @@
 import { NavigationProp } from "@react-navigation/core";
 import { observer } from "mobx-react-lite";
-import React from "react";
-import { Text, TextInput, View } from "react-native";
+import React, { useRef } from "react";
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { useQuery } from "react-query";
 import { useDebounced } from "../hooks/useDebounced";
 import { store } from "../store/MoviesStore";
@@ -12,8 +18,13 @@ import { CustomButton } from "./CustomButton";
 export const FilterMovies = observer(
   ({ navigation }: { navigation: NavigationProp<any> }) => {
     const [value, setValue] = React.useState("");
+    const [pressed, setPressed] = React.useState(false);
     const search = useDebounced(value, 1000);
-
+    const flatListRef = useRef<any>();
+    const toTop = () => {
+      flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+    };
+    //ne dela ref
     const { isLoading, isError, isIdle, data } = useQuery(
       ["FilteredMovies", search, store.pageNumber],
       () => {
@@ -23,32 +34,55 @@ export const FilterMovies = observer(
       { keepPreviousData: true }
     );
     return (
-      <View style={{ width: "100%" }}>
-        <TextInput
-          onSubmitEditing={(e) => {
-            store.resetPageNumber();
-            setValue(e.nativeEvent.text);
+      <View style={{ marginBottom: 400, width: "100%" }}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setPressed(false);
+            Keyboard.dismiss();
           }}
-          placeholder="go yes"
+        >
+          <View
+            style={[
+              !pressed
+                ? { marginBottom: 200 }
+                : { marginBottom: 200, transform: [{ translateY: 100 }] },
+            ]}
+          >
+            <TextInput
+              onFocus={() => setPressed(true)}
+              onChangeText={(e) => {
+                store.resetPageNumber();
+                setValue(e);
+              }}
+              onSubmitEditing={() => setPressed(false)}
+              placeholder="go yes"
+              style={{
+                marginTop: 140,
+                borderRadius: 5,
+                borderColor: "grey",
+                borderWidth: 2,
+                padding: 10,
+                marginHorizontal: 20,
+                marginBottom: -20,
+              }}
+            ></TextInput>
+            <Text></Text>
+            <FilterAndGenreList
+              // ref={flatListRef}
+              navigation={navigation}
+              isError={isError}
+              isLoading={isLoading}
+              isIdle={isIdle}
+              moviesData={data}
+            ></FilterAndGenreList>
+          </View>
+        </TouchableWithoutFeedback>
+        <View
           style={{
-            marginTop: 140,
-            borderRadius: 5,
-            borderColor: "grey",
-            borderWidth: 2,
-            padding: 10,
-            marginHorizontal: 20,
-            marginBottom: -20,
+            flexDirection: "row",
+            alignSelf: "center",
           }}
-        ></TextInput>
-        <Text></Text>
-        <FilterAndGenreList
-          navigation={navigation}
-          isError={isError}
-          isLoading={isLoading}
-          isIdle={isIdle}
-          moviesData={data}
-        ></FilterAndGenreList>
-        <View style={{ flexDirection: "row", alignSelf: "center" }}>
+        >
           <CustomButton
             title="Prev Page"
             color="white"
