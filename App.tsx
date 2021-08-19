@@ -12,7 +12,7 @@ import { ThemeProvider } from "@shopify/restyle";
 import theme from "./styles/theme";
 import { DownloadPosterScreen } from "./screens/DownloadPosterScreen";
 import { CategoriesScreen } from "./screens/CategoriesScreen";
-import { CommingSoonScreen } from "./screens/CommingSoonScreen";
+import { ComingSoonScreen } from "./screens/ComingSoonScreen";
 
 const queryClient = new QueryClient();
 
@@ -51,8 +51,8 @@ export default function App() {
                     />
                     <Drawer.Screen
                       name="CommingSoon"
-                      options={{ title: "Comming Soon" }}
-                      component={CommingSoonScreen}
+                      options={{ title: "Coming Soon" }}
+                      component={ComingSoonScreen}
                     ></Drawer.Screen>
                     <Drawer.Screen
                       options={{ title: "Download Movie Posters" }}

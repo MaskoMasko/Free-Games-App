@@ -40,7 +40,7 @@ export const DownloadPosterScreen = () => {
   // const downloadImage = () => {
   //   let date = new Date();
   //   let image_URL = REMOTE_IMAGE_PATH;
-  //   let ext = getExtention(image_URL);
+  //   let ext: any = getExtention(image_URL);
   //   ext = "." + ext[0];
   //   const { config, fs } = RNFetchBlob;
   //   let PictureDir = fs.dirs.PictureDir;
@@ -65,7 +65,7 @@ export const DownloadPosterScreen = () => {
   //     });
   // };
 
-  // const getExtention = (filename) => {
+  // const getExtention = (filename: string) => {
   //   return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
   // };
 

@@ -86,3 +86,13 @@ OVAJ API
 -UUUUUUU VERY NICE ACTORE MOREN i aint gonna lose that bad boy
 https://api.themoviedb.org/3/person/popular?api_key=b27cfa6975b477d35aff752392afd2bc&language=en-US&page=1
 -provided regions i dont rly know AHHHHHHHHHH
+
+JOS ZA NAPRAVITI:
+-dodati screenove za glumce
+-u kategorije dodati nike liste ili ca god
+-vjv ne dela zboj ssot ali samo provivan nisto tako da...
+
+ZA POMOCI:
+-download popraviti
+-ref na listami
+-read underlines
