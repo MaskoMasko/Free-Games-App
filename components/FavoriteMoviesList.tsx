@@ -42,8 +42,14 @@ export const FavoriteMoviesList = observer(() => {
         </Text>
       )}
       <Snackbar
+        duration={3000}
         visible={visible}
         onDismiss={() => dismiss()}
+        style={{
+          backgroundColor: "orange",
+          width: "95%",
+          alignSelf: "center",
+        }}
         action={{
           label: "Undo",
           onPress: () => {
@@ -51,7 +57,9 @@ export const FavoriteMoviesList = observer(() => {
           },
         }}
       >
-        Removed {store.selectedMovie?.title} from favorites...
+        <Text style={styles.removeButtonText}>
+          Removed {store.selectedMovie?.title} from favorites...
+        </Text>
       </Snackbar>
     </View>
   );

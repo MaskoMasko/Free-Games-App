@@ -22,7 +22,10 @@ export const MoviesForList = observer(function MoviesForList({
   return (
     <Animated.View
       key={movie.key}
-      style={[styles.movieContainer, { transform: [{ translateY }] }]}
+      style={[
+        styles.movieContainer,
+        { transform: [{ translateY }], marginTop: 50, marginBottom: 20 },
+      ]}
     >
       <Image
         style={styles.moviePoster}

@@ -31,12 +31,14 @@ export function HomeScreen({
 
   return (
     <ScrollView>
-      <BestRatedMovie></BestRatedMovie>
-      <Text variant="boldText" mt="100" mb="-50" fontSize={spacing.xl}>
-        Top Movies
-      </Text>
+      <BestRatedMovie navigation={navigation}></BestRatedMovie>
+      <View style={{ alignSelf: "center" }}>
+        <Text variant="boldText" mt="100" mb="50" fontSize={spacing.xl}>
+          Top Movies
+        </Text>
+      </View>
       <MovieList navigation={navigation}></MovieList>
-      <WatchItAgain></WatchItAgain>
+      <WatchItAgain navigation={navigation}></WatchItAgain>
     </ScrollView>
   );
 }

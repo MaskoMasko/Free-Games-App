@@ -84,15 +84,19 @@ export const MovieDetails = observer(
         </ScrollView>
         <View>
           <Snackbar
+            duration={3000}
+            style={{ backgroundColor: "orange" }}
             visible={showSnack}
             onDismiss={() => {
               dismiss();
             }}
           >
             {store.ima ? (
-              <Text>Already added that one...</Text>
+              <Text style={styles.removeButtonText}>
+                Already added that one...
+              </Text>
             ) : (
-              <Text>Added to favorites...</Text>
+              <Text style={styles.removeButtonText}>Added to favorites...</Text>
             )}
           </Snackbar>
         </View>

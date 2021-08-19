@@ -115,7 +115,8 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    width: 350,
+    // width: 350,
+    marginHorizontal: 30,
     marginTop: 300,
   },
   favListItemText: {
