@@ -54,7 +54,7 @@ export const WatchItAgain = observer(
                 { marginLeft: 20, marginTop: 40 },
               ]}
             >
-              You haven't watch any movie...
+              You haven't watched any movie...
             </Text>
           )}
         </ScrollView>
