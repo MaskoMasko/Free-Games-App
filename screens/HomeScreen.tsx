@@ -44,7 +44,7 @@ export const HomeScreen = observer(
         </View>
         <MovieList navigation={navigation}></MovieList>
         <WatchItAgain navigation={navigation}></WatchItAgain>
-        <Recommended></Recommended>
+        <Recommended navigation={navigation}></Recommended>
       </ScrollView>
     );
   }

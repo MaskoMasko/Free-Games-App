@@ -168,12 +168,6 @@ const MovieStore = model("MovieStore", {
         }
       },
       getGenresForRecommended() {
-        // for (const movie of self.watchedMovies) {
-        //   self.genresForRecommended.push(movie.genre_ids[0]);
-        // }
-        // if (self.genresForRecommended.length === 3) {
-        //   self.genresForRecommended = [];
-        // }
         let porkeLista = [];
         for (const movie of self.watchedMovies) {
           self.genresForRecommended.push(movie.genre_ids[0]);

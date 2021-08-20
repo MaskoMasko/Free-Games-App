@@ -11,6 +11,7 @@ import { useQuery } from "react-query";
 import { Instance } from "mobx-state-tree";
 import { MovieModel, store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
+import { getImagePath } from "../api/api";
 
 export const ComingSoonScreen = () => {
   const { isLoading, isError, isIdle, data } = useQuery(
@@ -80,7 +81,7 @@ export const ComingSoonScreen = () => {
                   >
                     <Image
                       source={{
-                        uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
+                        uri: getImagePath(movie.poster_path),
                       }}
                       style={{ width: 300, height: 300 }}
                     ></Image>
@@ -92,53 +93,6 @@ export const ComingSoonScreen = () => {
           );
         }}
       ></FlatList>
-      {/* <View>
-            {data?.map((page, id: number) => {
-              const filterano = page.filter((movie: any) => {
-            const thisYear = new Date().getFullYear();
-            const thisMonth = new Date().getMonth() + 1;
-            const thisDay = new Date().getDate();
-            const movieYear = movie.release_date.split("-")[0];
-            const movieMonth = movie.release_date.split("-")[1];
-            const movieDay = movie.release_date.split("-")[2];
-            if (
-              movieYear > thisYear ||
-              (movieYear == thisYear && movieMonth > thisMonth) ||
-              (movieYear == thisYear &&
-                movieMonth == thisMonth &&
-                movieDay > thisDay)
-            ) {
-              return movie;
-            } else {
-              return;
-            }
-          });
-          return (
-            <FlatList
-              key={id}
-              data={filterano}
-              keyExtractor={(movie) => movie.key}
-              renderItem={({ item: movie, index }) => {
-                return (
-                  <TouchableOpacity
-                    key={movie.key}
-                    activeOpacity={0.5}
-                    style={styles.filteredItemsContainer}
-                  >
-                    <Image
-                      source={{
-                        uri: `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
-                      }}
-                      style={{ width: 300, height: 300 }}
-                    ></Image>
-                    <Text style={styles.filteredItemsText}>{movie.title}</Text>
-                  </TouchableOpacity>
-                );
-              }}
-            ></FlatList>
-          );
-        })}
-      </View> */}
     </View>
   );
 };

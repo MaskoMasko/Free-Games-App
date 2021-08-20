@@ -1,9 +1,9 @@
 import { API_KEY } from "../config";
 
 const API_URL = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`;
-const getImagePath = (path: string) =>
+export const getImagePath = (path: string) =>
   `https://image.tmdb.org/t/p/w440_and_h660_face${path}`;
-const getBackdropPath = (path: string) =>
+export const getBackdropPath = (path: string) =>
   `https://image.tmdb.org/t/p/w370_and_h556_multi_faces${path}`;
 
 export interface BeforeMovieInterface {

@@ -1,12 +1,13 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity } from "react-native";
 import { store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
 import { useQuery } from "react-query";
 import { useIsFocused } from "@react-navigation/core";
+import { getImagePath } from "../api/api";
 
-export const Recommended = observer(() => {
+export const Recommended = observer(({ navigation }: any) => {
   const isFocused = useIsFocused();
   const { isLoading, data, isError } = useQuery(
     "Recommended",
@@ -36,22 +37,36 @@ export const Recommended = observer(() => {
         Recommended
       </Text>
       <View>
-        <View>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           {data.map((genre: any, id: number) => {
             return (
-              <View key={id}>
+              <View key={id} style={{ flexDirection: "row" }}>
                 {genre.results.splice(0, 5).map((movie: any, idx: number) => {
                   return (
-                    <View key={idx} style={{ flexDirection: "row" }}>
-                      <Text>{idx + 1} .</Text>
-                      <Text>{movie.title}</Text>
-                    </View>
+                    <TouchableOpacity
+                      key={idx}
+                      onPress={() => {}}
+                      activeOpacity={0.5}
+                    >
+                      <Image
+                        source={{ uri: getImagePath(movie.poster_path) }}
+                        style={styles.moviePoster}
+                      ></Image>
+                      <Text
+                        style={[
+                          styles.movieShortDescription,
+                          { width: 200, alignSelf: "center", marginBottom: 30 },
+                        ]}
+                      >
+                        {movie.title}
+                      </Text>
+                    </TouchableOpacity>
                   );
                 })}
               </View>
             );
           })}
-        </View>
+        </ScrollView>
       </View>
     </View>
   );

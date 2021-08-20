@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, Image, ScrollView } from "react-native";
+import { getImagePath } from "../api/api";
 import { store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
 
@@ -9,7 +10,7 @@ export const ActorDetailsScreen = () => {
       <Text style={styles.mainHeader}>{store.selectedActor?.name}</Text>
       <Image
         source={{
-          uri: `https://image.tmdb.org/t/p/w500/${store.selectedActor?.profile_path}`,
+          uri: getImagePath(store.selectedActor?.profile_path!),
         }}
         style={styles.imageStyle}
       ></Image>

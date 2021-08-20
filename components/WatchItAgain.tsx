@@ -36,7 +36,12 @@ export const WatchItAgain = observer(
                       source={{ uri: movie.poster }}
                       style={styles.moviePoster}
                     ></Image>
-                    <Text style={styles.movieShortDescription}>
+                    <Text
+                      style={[
+                        styles.movieShortDescription,
+                        { width: 200, alignSelf: "center" },
+                      ]}
+                    >
                       {movie.title}
                     </Text>
                   </TouchableOpacity>
