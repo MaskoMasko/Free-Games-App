@@ -16,11 +16,9 @@ import { CustomButton } from "./CustomButton";
 
 export const Trailer = () => {
   const [playing, setPlaying] = useState(false);
-
   const { data, isLoading } = useQuery("Trailes", () => {
     return store.fetchAllData("trailer", store.selectedMovie?.key);
   });
-
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
