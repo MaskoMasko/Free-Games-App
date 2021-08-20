@@ -9,7 +9,6 @@ import {
   Platform,
 } from "react-native";
 import RNFetchBlob from "rn-fetch-blob";
-import { Trailer } from "../components/Trailer";
 
 export const DownloadPosterScreen = () => {
   // const REMOTE_IMAGE_PATH =
@@ -72,7 +71,6 @@ export const DownloadPosterScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Trailer></Trailer>
       {/* //     <View style={{ alignItems: "center" }}>
   //       <Text style={{ fontSize: 30, textAlign: "center" }}>
   //         React Native Image Download Example

@@ -8,6 +8,7 @@ import { styles } from "../styles/styles";
 import Text from "../styles/Text";
 import theme from "../styles/theme";
 import { Snackbar } from "./Snackbar";
+import { Trailer } from "./Trailer";
 
 const { spacing } = theme;
 
@@ -54,6 +55,13 @@ export const MovieDetails = observer(
           <Text fontSize={spacing.l} mx="s">
             Release Date: {store.selectedMovie?.releaseDate}
           </Text>
+          <Text fontSize={spacing.l} mx="s">
+            Trailer
+          </Text>
+          <Text style={{ margin: 20 }}>
+            OVODE VJV NI TRAILER ALI MI SE NE DA DNS TO NASIMAVATI! :)
+          </Text>
+          <Trailer></Trailer>
           <Text fontSize={spacing.l} mx="s" mb="0">
             Summary
           </Text>

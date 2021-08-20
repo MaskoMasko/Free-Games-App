@@ -266,6 +266,10 @@ const MovieStore = model("MovieStore", {
             allRecommended.push(data);
           }
           return allRecommended;
+        } else if (option == "trailer") {
+          const url = `https://api.themoviedb.org/3/movie/${value}/videos?api_key=${API_KEY}`;
+          const data = yield fetch(url).then((r) => r.json());
+          return data.results[0].key;
         }
         const moviesListData = yield getMovies();
         for (let movie of moviesListData) {
