@@ -35,6 +35,7 @@ export const Trailer = () => {
   return (
     <View style={{ flex: 1, alignSelf: "center" }}>
       <YoutubePlayer
+        allowWebViewZoom={true}
         height={250}
         width={400}
         play={playing}
