@@ -16,9 +16,16 @@ export const Snackbar = (props: any) => {
         backgroundColor: "orange",
         width: "95%",
         alignSelf: "center",
+        height: "auto",
       }}
       action={{
         label: `${[text == "removed" ? "Undo" : ""]}`,
+        labelStyle: {
+          color: "white",
+          padding: 10,
+          borderRadius: 10,
+          backgroundColor: "black",
+        },
         onPress: () => {
           store.selectedMovie?.addToFavorites();
         },
@@ -26,7 +33,7 @@ export const Snackbar = (props: any) => {
     >
       <View>
         {text == "removed" ? (
-          <Text style={styles.removeButtonText}>
+          <Text style={[styles.removeButtonText, { width: 275 }]}>
             Removed {store.selectedMovie?.title} from favorites...
           </Text>
         ) : text == "add" ? (

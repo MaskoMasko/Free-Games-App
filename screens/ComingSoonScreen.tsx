@@ -46,9 +46,7 @@ export const ComingSoonScreen = () => {
       </Text>
       <FlatList
         data={data}
-        keyExtractor={(data, id) => {
-          return data.map((movie: any) => movie.title);
-        }}
+        keyExtractor={(data, id) => id.toString()}
         renderItem={({ item: page, index }) => {
           const filterano = page.filter((movie: any) => {
             const thisYear = new Date().getFullYear();

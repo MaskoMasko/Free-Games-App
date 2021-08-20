@@ -66,7 +66,7 @@ export const MovieDetails = observer(
             <CustomButton
               color="white"
               backgroundColor="black"
-              title="GO BACK"
+              title="GO HOME"
               onPress={() => {
                 navigation.navigate("Home");
               }}

@@ -25,7 +25,7 @@ export const BeforeMovie = model({
   id: number,
   original_title: maybe(string),
   poster_path: maybe(string),
-  backdrop_path: maybe(string),
+  backdrop_path: types.maybeNull(string),
   vote_average: number,
   overview: string,
   release_date: maybe(string),
@@ -84,7 +84,7 @@ const MovieStore = model("MovieStore", {
   genreName: "",
   pageNumber: 1,
   genrePageNumber: 1,
-  actorsPageNumber: 1,
+  actorsPageNumber: 495,
 
   ima: false,
 })
@@ -192,6 +192,8 @@ const MovieStore = model("MovieStore", {
             self.pageNumber = 1;
           } else if (whatPage == "category") {
             self.genrePageNumber = 1;
+          } else if (whatPage == "actors") {
+            self.actorsPageNumber = 1;
           }
         }
       },

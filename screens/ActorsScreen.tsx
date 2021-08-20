@@ -1,10 +1,11 @@
+import { observer } from "mobx-react-lite";
 import React from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { Text, View } from "react-native";
+import { useQuery } from "react-query";
+import { ActorList } from "../components/ActorsList";
 import { CustomButton } from "../components/CustomButton";
 import { store } from "../store/MoviesStore";
-import { useQuery } from "react-query";
 import { styles } from "../styles/styles";
-import { observer } from "mobx-react-lite";
 
 export const ActorsScreen = observer(({ navigation }: any) => {
   const { isLoading, isError, isIdle, data } = useQuery(
@@ -13,62 +14,30 @@ export const ActorsScreen = observer(({ navigation }: any) => {
       return store.fetchAllData("fetchActors", "");
     }
   );
-  if (isLoading) {
-    return <Text>loading...</Text>;
-  }
-  return (
-    <View style={{ marginBottom: 70 }}>
-      <FlatList
-        data={data}
-        keyExtractor={(actor) => actor.name}
-        renderItem={({ item: actor, index }) => {
-          return (
-            <TouchableOpacity
-              onPress={() => {
-                store.setActor(actor.name);
-                navigation.navigate("ActorDetails");
-              }}
-              activeOpacity={0.3}
-              style={{ backgroundColor: "orange", margin: 10, padding: 20 }}
-            >
-              <Text
-                style={[
-                  styles.favListItemText,
-                  { color: "black", alignSelf: "flex-start" },
-                ]}
-              >
-                {actor.name}
-              </Text>
-            </TouchableOpacity>
-          );
-        }}
-      ></FlatList>
-      <View
-        style={{
-          flexDirection: "row",
-          alignSelf: "center",
-        }}
-      >
+  if (store.actorsPageNumber == 501) {
+    return (
+      <View style={styles.errorAndLoadingViews}>
+        <Text style={[styles.errorAndLoading, { width: 300 }]}>
+          No More Data...
+        </Text>
         <CustomButton
-          title="Prev Page"
           color="white"
-          backgroundColor="orange"
+          backgroundColor="black"
+          title="GO HOME"
           onPress={() => {
-            // toTop();
-            store.setPagination("actors", "decrease");
-          }}
-        ></CustomButton>
-        <Text style={styles.pageNumber}>{store.actorsPageNumber}</Text>
-        <CustomButton
-          title="Next Page"
-          color="white"
-          backgroundColor="orange"
-          onPress={() => {
-            // toTop();
-            store.setPagination("actors", "increase");
+            store.setPagination("actors", "reset");
+            navigation.navigate("Home");
           }}
         ></CustomButton>
       </View>
-    </View>
-  );
+    );
+  }
+  if (isLoading) {
+    return (
+      <View style={styles.errorAndLoadingViews}>
+        <Text style={styles.errorAndLoading}>Loading...</Text>
+      </View>
+    );
+  }
+  return <ActorList navigation={navigation} data={data}></ActorList>;
 });

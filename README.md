@@ -99,8 +99,6 @@ ZA POMOCI:
 
 OVAKO JER DA
 -filter input
--upcoming nisto neam pojma
--actori => flatlista u flatlisti dolazi warrning ili error nisan sig
 
 HOOKVI
 useState
