@@ -19,13 +19,17 @@ export const Snackbar = (props: any) => {
         height: "auto",
       }}
       action={{
-        label: `${[text == "removed" ? "Undo" : ""]}`,
-        labelStyle: {
-          color: "white",
-          padding: 10,
-          borderRadius: 10,
-          backgroundColor: "black",
-        },
+        label: `${[text == "removed" ? "Undo" : null]}`,
+        labelStyle: [
+          text == "removed"
+            ? {
+                color: "white",
+                padding: 10,
+                borderRadius: 10,
+                backgroundColor: "black",
+              }
+            : null,
+        ],
         onPress: () => {
           store.selectedMovie?.addToFavorites();
         },

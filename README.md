@@ -99,6 +99,7 @@ ZA POMOCI:
 
 OVAKO JER DA
 -filter input
+-i think da ima i trailera
 
 HOOKVI
 useState

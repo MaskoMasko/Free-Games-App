@@ -2,6 +2,7 @@ import { Instance, flow, getRoot, types } from "mobx-state-tree";
 import { getFilteredMovies, getMovies, getMoviesByGenre } from "../api/api";
 import { API_KEY } from "../config";
 import { BeforeMovieInterface } from "../api/api";
+import { values } from "mobx";
 
 const {
   string,
@@ -84,9 +85,11 @@ const MovieStore = model("MovieStore", {
   genreName: "",
   pageNumber: 1,
   genrePageNumber: 1,
-  actorsPageNumber: 495,
+  actorsPageNumber: 1,
 
   ima: false,
+
+  genresForRecommended: array(safeReference(GenreModel)),
 })
   .views((self) => {
     return {
@@ -164,6 +167,31 @@ const MovieStore = model("MovieStore", {
           }
         }
       },
+      getGenresForRecommended() {
+        // for (const movie of self.watchedMovies) {
+        //   self.genresForRecommended.push(movie.genre_ids[0]);
+        // }
+        // if (self.genresForRecommended.length === 3) {
+        //   self.genresForRecommended = [];
+        // }
+        let porkeLista = [];
+        for (const movie of self.watchedMovies) {
+          self.genresForRecommended.push(movie.genre_ids[0]);
+        }
+        if (self.genresForRecommended.length <= 3) {
+          return;
+        }
+        porkeLista.push(
+          self.genresForRecommended[self.genresForRecommended.length - 1]
+        );
+        porkeLista.push(
+          self.genresForRecommended[self.genresForRecommended.length - 2]
+        );
+        porkeLista.push(
+          self.genresForRecommended[self.genresForRecommended.length - 3]
+        );
+        self.genresForRecommended = porkeLista;
+      },
       setPagination(whatPage: any, action: string) {
         if (action == "increase") {
           if (whatPage == "category") {
@@ -236,6 +264,14 @@ const MovieStore = model("MovieStore", {
 
           const data = yield fetch(url).then((r) => r.json());
           return self.processGenre(data.genres);
+        } else if (option == "recommended") {
+          let allRecommended = [];
+          for (let i = 0; i < value.length; i++) {
+            const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${value[i].id}&page=1`;
+            const data = yield fetch(url).then((r) => r.json());
+            allRecommended.push(data);
+          }
+          return allRecommended;
         }
         const moviesListData = yield getMovies();
         for (let movie of moviesListData) {
