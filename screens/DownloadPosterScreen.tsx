@@ -8,22 +8,72 @@ import {
   Image,
   Platform,
   ScrollView,
+  Button,
+  TextInput,
 } from "react-native";
 import RNFetchBlob from "rn-fetch-blob";
 import Pusher from "pusher-js/react-native";
+import axios from "axios";
 
 export const DownloadPosterScreen = () => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  // Make a request for a user with a given ID
+  axios
+    .get("/user?ID=12345")
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+
+  // Optionally the request above could also be done as
+  axios
+    .get("/user", {
+      params: {
+        ID: 12345,
+      },
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+
+  // Want to use async/await? Add the async keyword to your outer function/method.
+  async function getUser() {
+    try {
+      const response = await axios.get("/user?ID=12345");
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   // Enable pusher logging - don't include this in production
+
   Pusher.logToConsole = true;
 
   var pusher = new Pusher("be069965d415f82969e7", {
     cluster: "eu",
   });
 
-  var channel = pusher.subscribe("chat");
-  channel.bind("SendMessage", function (data: any) {
+  var channel = pusher.subscribe("pTvb4nzZpFCciOdo2YcbwyQNCSi06cJS");
+  channel.bind("SendPrivateMessage", function (data: any) {
     console.log(JSON.stringify(data));
   });
+
   // const pusher = new Pusher("local", {
   //   cluster: "mt1",
   //   authEndpoint: "http://mockapi.ddns.net/",
@@ -69,8 +119,20 @@ export const DownloadPosterScreen = () => {
   //   cluster: "mt1",
   //   authorizer: authorizer,
   // });
+  const nisto = (email: string, password: string) => {
+    console.log(email, password);
+  };
   return (
     <ScrollView>
+      <Text>Email:</Text>
+      <TextInput value={email} onChangeText={(e) => setEmail(e)}></TextInput>
+      <Text>Password:</Text>
+      <TextInput
+        value={password}
+        onChangeText={(e) => setPassword(e)}
+        secureTextEntry={true}
+      ></TextInput>
+      <Button title="submit" onPress={() => nisto(email, password)}></Button>
       {/* <Text>{JSON.stringify(pusher, null, 2)}</Text> */}
     </ScrollView>
   );
