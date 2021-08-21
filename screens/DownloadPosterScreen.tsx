@@ -7,102 +7,166 @@ import {
   PermissionsAndroid,
   Image,
   Platform,
+  ScrollView,
 } from "react-native";
 import RNFetchBlob from "rn-fetch-blob";
+import Pusher from "pusher-js/react-native";
 
 export const DownloadPosterScreen = () => {
-  // const REMOTE_IMAGE_PATH =
-  //   "https://image.dnevnik.hr/media/images/920x695/Jan2019/61629758.jpg";
-  // const checkPermission = async () => {
-  //   if (Platform.OS === "ios") {
-  //     downloadImage();
-  //   } else {
-  //     try {
-  //       const granted = await PermissionsAndroid.request(
-  //         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-  //         {
-  //           title: "Storage Permission Required",
-  //           message: "App needs access to your storage to download Photos",
-  //         }
-  //       );
-  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //         console.log("Storage Permission Granted.");
-  //         downloadImage();
-  //       } else {
-  //         alert("Storage Permission Not Granted");
-  //       }
-  //     } catch (err) {
-  //       console.warn(err);
-  //     }
-  //   }
-  // };
+  // Enable pusher logging - don't include this in production
+  Pusher.logToConsole = true;
 
-  // const downloadImage = () => {
-  //   let date = new Date();
-  //   let image_URL = REMOTE_IMAGE_PATH;
-  //   let ext: any = getExtention(image_URL);
-  //   ext = "." + ext[0];
-  //   const { config, fs } = RNFetchBlob;
-  //   let PictureDir = fs.dirs.PictureDir;
-  //   let options = {
-  //     fileCache: true,
-  //     addAndroidDownloads: {
-  //       useDownloadManager: true,
-  //       notification: true,
-  //       path:
-  //         PictureDir +
-  //         "/image_" +
-  //         Math.floor(date.getTime() + date.getSeconds() / 2) +
-  //         ext,
-  //       description: "Image",
+  var pusher = new Pusher("be069965d415f82969e7", {
+    cluster: "eu",
+  });
+
+  var channel = pusher.subscribe("chat");
+  channel.bind("SendMessage", function (data: any) {
+    console.log(JSON.stringify(data));
+  });
+  // const pusher = new Pusher("local", {
+  //   cluster: "mt1",
+  //   authEndpoint: "http://mockapi.ddns.net/",
+  //   auth: {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "X-CSRF-TOKEN": "CSRF-Token",
+  //     },
+  //   },
+  // });
+  // let authorizer = (channel: any, options: any) => {
+  //   return {
+  //     authorize: (socketId: any, callback: any) => {
+  //       fetch("/login", {
+  //         method: "POST",
+  //         headers: new Headers({ "Content-Type": "application/json" }),
+  //         body: JSON.stringify({
+  //           email: "masko@gmail.com",
+  //           password: "password",
+  //         }),
+  //       })
+  //         .then((res) => {
+  //           console.log(res);
+  //           if (!res.ok) {
+  //             throw new Error(`Received ${res.statusCode} from /login`);
+  //           }
+  //           return res.json();
+  //         })
+  //         .then((data) => {
+  //           console.log(data);
+  //           callback(null, data);
+  //         })
+  //         .catch((err) => {
+  //           callback(new Error(`Error calling auth endpoint: ${err}`), {
+  //             auth: "",
+  //           });
+  //         });
   //     },
   //   };
-  //   config(options)
-  //     .fetch("GET", image_URL)
-  //     .then((res) => {
-  //       console.log("res -> ", JSON.stringify(res));
-  //       alert("Image Downloaded Successfully.");
-  //     });
   // };
 
-  // const getExtention = (filename: string) => {
-  //   return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
-  // };
-
+  // const pusher = new Pusher("local", {
+  //   cluster: "mt1",
+  //   authorizer: authorizer,
+  // });
   return (
-    <View style={styles.container}>
-      {/* //     <View style={{ alignItems: "center" }}>
-  //       <Text style={{ fontSize: 30, textAlign: "center" }}>
-  //         React Native Image Download Example
-  //       </Text>
-  //       <Text
-  //         style={{
-  //           fontSize: 25,
-  //           marginTop: 20,
-  //           marginBottom: 30,
-  //           textAlign: "center",
-  //         }}
-  //       >
-  //         www.aboutreact.com
-  //       </Text>
-  //     </View>
-  //     <Image
-  //       source={{
-  //         uri: REMOTE_IMAGE_PATH,
-  //       }}
-  //       style={{
-  //         width: "100%",
-  //         height: 100,
-  //         resizeMode: "contain",
-  //         margin: 5,
-  //       }}
-  //     />
-  //     <TouchableOpacity style={styles.button} onPress={checkPermission}>
-  //       <Text style={styles.text}>Download Image</Text>
-  //     </TouchableOpacity> */}
-    </View>
+    <ScrollView>
+      {/* <Text>{JSON.stringify(pusher, null, 2)}</Text> */}
+    </ScrollView>
   );
 };
+// const REMOTE_IMAGE_PATH =
+//   "https://image.dnevnik.hr/media/images/920x695/Jan2019/61629758.jpg";
+// const checkPermission = async () => {
+//   if (Platform.OS === "ios") {
+//     downloadImage();
+//   } else {
+//     try {
+//       const granted = await PermissionsAndroid.request(
+//         PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+//         {
+//           title: "Storage Permission Required",
+//           message: "App needs access to your storage to download Photos",
+//         }
+//       );
+//       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+//         console.log("Storage Permission Granted.");
+//         downloadImage();
+//       } else {
+//         alert("Storage Permission Not Granted");
+//       }
+//     } catch (err) {
+//       console.warn(err);
+//     }
+//   }
+// };
+
+// const downloadImage = () => {
+//   let date = new Date();
+//   let image_URL = REMOTE_IMAGE_PATH;
+//   let ext: any = getExtention(image_URL);
+//   ext = "." + ext[0];
+//   const { config, fs } = RNFetchBlob;
+//   let PictureDir = fs.dirs.PictureDir;
+//   let options = {
+//     fileCache: true,
+//     addAndroidDownloads: {
+//       useDownloadManager: true,
+//       notification: true,
+//       path:
+//         PictureDir +
+//         "/image_" +
+//         Math.floor(date.getTime() + date.getSeconds() / 2) +
+//         ext,
+//       description: "Image",
+//     },
+//   };
+//   config(options)
+//     .fetch("GET", image_URL)
+//     .then((res) => {
+//       console.log("res -> ", JSON.stringify(res));
+//       alert("Image Downloaded Successfully.");
+//     });
+// };
+
+// const getExtention = (filename: string) => {
+//   return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
+// };
+
+//   return (
+//     <View style={styles.container}>
+//        //     <View style={{ alignItems: "center" }}>
+//   //       <Text style={{ fontSize: 30, textAlign: "center" }}>
+//   //         React Native Image Download Example
+//   //       </Text>
+//   //       <Text
+//   //         style={{
+//   //           fontSize: 25,
+//   //           marginTop: 20,
+//   //           marginBottom: 30,
+//   //           textAlign: "center",
+//   //         }}
+//   //       >
+//   //         www.aboutreact.com
+//   //       </Text>
+//   //     </View>
+//   //     <Image
+//   //       source={{
+//   //         uri: REMOTE_IMAGE_PATH,
+//   //       }}
+//   //       style={{
+//   //         width: "100%",
+//   //         height: 100,
+//   //         resizeMode: "contain",
+//   //         margin: 5,
+//   //       }}
+//   //     />
+//   //     <TouchableOpacity style={styles.button} onPress={checkPermission}>
+//   //       <Text style={styles.text}>Download Image</Text>
+//   //     </TouchableOpacity>
+//     </View>
+//   );
+// };
 
 const styles = StyleSheet.create({
   container: {

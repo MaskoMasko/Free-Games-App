@@ -31,7 +31,7 @@ export default function App() {
             <Stack.Screen name="DrawerStack" options={{ headerShown: false }}>
               {() => {
                 return (
-                  <Drawer.Navigator initialRouteName="Home">
+                  <Drawer.Navigator initialRouteName="Download">
                     <Drawer.Screen
                       name="Home"
                       component={HomeScreen}
