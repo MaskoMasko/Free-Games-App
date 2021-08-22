@@ -18,52 +18,58 @@ import axios from "axios";
 export const DownloadPosterScreen = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [data, setData] = React.useState<any>(null);
 
-  // Make a request for a user with a given ID
-  axios
-    .get("/user?ID=12345")
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
-
-  // Optionally the request above could also be done as
-  axios
-    .get("/user", {
-      params: {
-        ID: 12345,
+  const logout = () => {
+    axios({
+      method: "post",
+      url: "http://mockapi.ddns.net/logout",
+      headers: {
+        "content-type": "application/json",
       },
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
+    }).then((res) => {
+      console.log(res);
     });
+  };
+  const login = () => {
+    axios({
+      method: "post",
+      url: "http://mockapi.ddns.net/loginReact",
+      data: {
+        email: "masko@gmail.com",
+        password: "password",
+      },
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+  };
 
+  const islogged = () => {
+    axios({
+      method: "post",
+      url: "http://mockapi.ddns.net/checkIfLoggedIn",
+      headers: {
+        "content-type": "application/json",
+      },
+    }).then((res) => {
+      console.log(res);
+    });
+  };
+  const session = () => {
+    axios({
+      method: "get",
+      url: "http://mockapi.ddns.net/sessionDate",
+    }).then((res: any) => {
+      setData(res);
+      console.log(res);
+    });
+  };
   // Want to use async/await? Add the async keyword to your outer function/method.
-  async function getUser() {
-    try {
-      const response = await axios.get("/user?ID=12345");
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   // Enable pusher logging - don't include this in production
-
-  Pusher.logToConsole = true;
+  // Pusher.logToConsole = true;
 
   var pusher = new Pusher("be069965d415f82969e7", {
     cluster: "eu",
@@ -71,7 +77,7 @@ export const DownloadPosterScreen = () => {
 
   var channel = pusher.subscribe("pTvb4nzZpFCciOdo2YcbwyQNCSi06cJS");
   channel.bind("SendPrivateMessage", function (data: any) {
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
   });
 
   // const pusher = new Pusher("local", {
@@ -119,12 +125,10 @@ export const DownloadPosterScreen = () => {
   //   cluster: "mt1",
   //   authorizer: authorizer,
   // });
-  const nisto = (email: string, password: string) => {
-    console.log(email, password);
-  };
+  // console.log(`http://mockapi.ddns.net/storage/user_avatar/${data.data.image}`);
   return (
     <ScrollView>
-      <Text>Email:</Text>
+      {/* <Text>Email:</Text>
       <TextInput value={email} onChangeText={(e) => setEmail(e)}></TextInput>
       <Text>Password:</Text>
       <TextInput
@@ -132,8 +136,21 @@ export const DownloadPosterScreen = () => {
         onChangeText={(e) => setPassword(e)}
         secureTextEntry={true}
       ></TextInput>
-      <Button title="submit" onPress={() => nisto(email, password)}></Button>
+      <Button title="submit" onPress={() => nisto(email, password)}></Button> */}
       {/* <Text>{JSON.stringify(pusher, null, 2)}</Text> */}
+      <Button title="login" onPress={login}></Button>
+      <Button title="logout" onPress={logout}></Button>
+      <Button title="islogged?" onPress={islogged}></Button>
+      <Button title="session" onPress={session}></Button>
+      <Text>{data.data.name}</Text>
+      <Text>{data.data.email}</Text>
+      <Image
+        source={{
+          uri: `http://mockapi.ddns.net/${data.data.image}`,
+        }}
+        style={{ width: 300, height: 300 }}
+      ></Image>
+      {/* <Text>{JSON.stringify(data, null, 2)}</Text> */}
     </ScrollView>
   );
 };
