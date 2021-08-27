@@ -61,7 +61,7 @@ export const MovieDetails = observer(
           <Text style={{ margin: 20 }}>
             OVODE VJV NI TRAILER ALI MI SE NE DA DNS TO NASIMAVATI! :)
           </Text>
-          <Trailer></Trailer>
+          {/* <Trailer></Trailer> */}
           <Text fontSize={spacing.l} mx="s" mb="0">
             Summary
           </Text>
