@@ -5,7 +5,7 @@ import { store } from "../store/MoviesStore";
 import { styles } from "../styles/styles";
 import { Snackbar } from "./Snackbar";
 
-export const FavoriteMoviesList = observer(() => {
+export const FavoriteMoviesList = observer(({ navigation }: any) => {
   const [visible, setVisible] = React.useState(false);
   const dismiss = () => {
     setVisible(false);
@@ -15,25 +15,30 @@ export const FavoriteMoviesList = observer(() => {
       {store.favoriteMoviesList.length !== 0 ? (
         store.favoriteMoviesList.map((movie, index) => {
           return (
-            <View
+            <TouchableOpacity
               key={index}
-              style={[styles.favListItemContainer, { marginBottom: 0 }]}
+              onPress={() => {
+                store.setSelectedMovie(movie.key);
+                navigation.navigate("Details");
+              }}
             >
-              <Text style={styles.favListItemText}>
-                {movie?.title.toUpperCase()}
-              </Text>
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => {
-                  setVisible(true);
-                  store.setSelectedMovie(movie.key);
-                  store.removeFavoriteMovie(index);
-                }}
-                style={styles.removeButton}
-              >
-                <Text style={styles.removeButtonText}>REMOVE</Text>
-              </TouchableOpacity>
-            </View>
+              <View style={[styles.favListItemContainer, { marginBottom: 0 }]}>
+                <Text style={styles.favListItemText}>
+                  {movie?.title.toUpperCase()}
+                </Text>
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  onPress={() => {
+                    setVisible(true);
+                    store.setSelectedMovie(movie.key);
+                    store.removeFavoriteMovie(index);
+                  }}
+                  style={styles.removeButton}
+                >
+                  <Text style={styles.removeButtonText}>REMOVE</Text>
+                </TouchableOpacity>
+              </View>
+            </TouchableOpacity>
           );
         })
       ) : (

@@ -83,7 +83,7 @@ export const ComingSoonScreen = () => {
                       source={{
                         uri: getImagePath(movie.poster_path),
                       }}
-                      style={{ width: 300, height: 300 }}
+                      style={styles.filteredItemsImage}
                     ></Image>
                     <Text style={styles.filteredItemsText}>{movie.title}</Text>
                   </TouchableOpacity>
